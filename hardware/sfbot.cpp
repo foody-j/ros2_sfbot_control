@@ -108,7 +108,7 @@ hardware_interface::CallbackReturn SfBotSystemHardware::on_init(
   return hardware_interface::CallbackReturn::SUCCESS;
 }
 
-hardware_interface::CallbackReturn RRBotSystemPositionOnlyHardware::on_configure(
+hardware_interface::CallbackReturn SfBotSystemHardware::on_configure(
   const rclcpp_lifecycle::State & /*previous_state*/)
 {
   // BEGIN: This part here is for exemplary purposes - Please do not copy to your production code
@@ -135,13 +135,12 @@ hardware_interface::CallbackReturn RRBotSystemPositionOnlyHardware::on_configure
   return hardware_interface::CallbackReturn::SUCCESS;
 }
 
-hardware_interface::CallbackReturn RRBotSystemPositionOnlyHardware::on_activate(
+hardware_interface::CallbackReturn SfBotSystemHardware::on_activate(
   const rclcpp_lifecycle::State & /*previous_state*/)
 {
   // BEGIN: This part here is for exemplary purposes - Please do not copy to your production code
   RCLCPP_INFO(get_logger(), "Activating ...please wait...");
   
-  // comms_.connect(cfg_.device, cfg_.baud_rate, cfg_.timeout_ms); //통신 연결 할곳
   // CAN 드라이버 초기화 및 연결
   can_driver.connect("can0", 1000000)
   std::this_thread::sleep_for(std::chrono::seconds(1));
@@ -154,29 +153,41 @@ hardware_interface::CallbackReturn RRBotSystemPositionOnlyHardware::on_activate(
   return hardware_interface::CallbackReturn::SUCCESS;
 }
 
-hardware_interface::CallbackReturn RRBotSystemPositionOnlyHardware::on_deactivate(
+hardware_interface::CallbackReturn SfBotSystemHardware::on_deactivate(
   const rclcpp_lifecycle::State & /*previous_state*/)
 {
   // BEGIN: This part here is for exemplary purposes - Please do not copy to your production code
   RCLCPP_INFO(get_logger(), "Deactivating ...please wait...");
 
-  comms_.disconnect(); // 연결 끊기
+  //comms_.disconnect(); // 연결 끊기
+  can_driver.disconnect();
   RCLCPP_INFO(get_logger(), "Successfully deactivated!");
   // END: This part here is for exemplary purposes - Please do not copy to your production code
 
   return hardware_interface::CallbackReturn::SUCCESS;
 }
 
-hardware_interface::return_type RRBotSystemPositionOnlyHardware::read(
+hardware_interface::return_type SfBotSystemHardware::read(
   const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
   // BEGIN: This part here is for exemplary purposes - Please do not copy to your production code
-    if (!comms_.connected())
+    if (!can_driver.connected())
   {
     return hardware_interface::return_type::ERROR;
   }
+  for (uint8_t i = 1; i < 3; i++)  // 모터 1번과 2번의 데이터를 가져옴
+  {
+      MotorData motor_data = can_driver.getMotorData(i);
+      std::cout << "Motor " << i << ": "  // motor_id 대신 i를 사용해야 합니다
+          << "Position: " << motor_data.position << "° "
+          << "Speed: " << motor_data.speed << " RPM "
+          << "Current: " << motor_data.current << "A "
+          << "Temperature: " << (int)motor_data.temperature << "°C "
+          << "Error: 0x" << std::hex << (int)motor_data.error 
+          << std::dec << std::endl;
+  }
 
-  can_driver
+  /*
   comms_.read_encoder_values(wheel_l_.enc, wheel_r_.enc);
 
   double delta_seconds = period.seconds();
@@ -187,19 +198,20 @@ hardware_interface::return_type RRBotSystemPositionOnlyHardware::read(
 
   pos_prev = wheel_r_.pos;
   wheel_r_.pos = wheel_r_.calc_enc_angle();
-  wheel_r_.vel = (wheel_r_.pos - pos_prev) / delta_seconds;
+  wheel_r_.vel = (wheel_r_.pos - pos_prev) / delta_seconds;*/
 
   // END: This part here is for exemplary purposes - Please do not copy to your production code
 
   return hardware_interface::return_type::OK;
 }
 
-hardware_interface::return_type RRBotSystemPositionOnlyHardware::write(
+hardware_interface::return_type SfBotSystemHardware::write(
   const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
-  int motor_l_counts_per_loop = wheel_l_.cmd / wheel_l_.rads_per_count / cfg_.loop_rate;
+  // write 함수는 일단 비움..
+  /*int motor_l_counts_per_loop = wheel_l_.cmd / wheel_l_.rads_per_count / cfg_.loop_rate;
   int motor_r_counts_per_loop = wheel_r_.cmd / wheel_r_.rads_per_count / cfg_.loop_rate;
-  comms_.set_motor_values(motor_l_counts_per_loop, motor_r_counts_per_loop);
+  comms_.set_motor_values(motor_l_counts_per_loop, motor_r_counts_per_loop);*/
 
   return hardware_interface::return_type::OK;
 }
@@ -209,4 +221,4 @@ hardware_interface::return_type RRBotSystemPositionOnlyHardware::write(
 #include "pluginlib/class_list_macros.hpp"
 
 PLUGINLIB_EXPORT_CLASS(
-  ros2_control_demo_example_1::RRBotSystemPositionOnlyHardware, hardware_interface::SystemInterface)
+  ros2_control_demo_example_1::SfBotSystemHardware, hardware_interface::SystemInterface)

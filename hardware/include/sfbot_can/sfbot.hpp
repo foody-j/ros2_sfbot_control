@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef ROS2_CONTROL_DEMO_EXAMPLE_1__RRBOT_HPP_
-#define ROS2_CONTROL_DEMO_EXAMPLE_1__RRBOT_HPP_
+#ifndef ROS2_CONTROL__SFBOT_HPP_
+#define ROS2_CONTROL__RRBOT_HPP_
 
 #include <memory> // 필요한 C++ 표준 라이브러리 헤더 포함
 #include <string> // 스마트 포인터 사용을 위한 헤더

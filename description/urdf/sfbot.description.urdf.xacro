@@ -1,0 +1,207 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="sfbot">
+
+    <link name="world" /link>
+
+    <joint name="base_joint" type="fixed">
+        <origin xyz="1.5 1.0 0" rpy="0 0 0"/>
+        <parent link="world"/>
+        <child link="base_link"/>        
+    </joint>
+
+    <link name="base_link">
+        <inertial>
+            <origin xyz="0.0013386396517363875 -0.0011242493747386578 0.009051092998347913" rpy="0.0 0.0 0.0" />
+            <mass value="3.888884702652834" />
+            <inertia ixx="0.010759968313061485" iyy="0.010736881042533725" izz="0.020894462545599256" ixy="0.00021664303992281595" iyz="0.00020888253586269707" ixz="-0.00017260000031820458" />
+        </inertial>
+        <visual name="base_link_visual">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <geometry>
+                <mesh filename="package://my_robot_hardware/urdf/meshes/base_link.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="base_link_collision">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <geometry>
+                <mesh filename="package://my_robot_hardware/urdf/meshes/base_link.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="Component2">
+        <inertial>
+            <origin xyz="0.010945074522192507 1.6285806493933998e-05 -0.00012479722831548246" rpy="0.0 -0.0 0.0" />
+            <mass value="1.0016922735671667" />
+            <inertia ixx="0.0011260395358370881" iyy="0.0005973385271454308" izz="0.0005917945399063129" ixy="1.0527145733118499e-07" iyz="7.360388447256132e-07" ixz="-8.067346046123616e-07" />
+        </inertial>
+        <visual name="Component2_visual">
+            <origin xyz="-0.06300000093876953 9.933979985053653e-18 -1.058454243043459e-16" rpy="1.5707963267947935 1.5283000565118283 1.5707963267947935" />
+            <geometry>
+                <mesh filename="package://my_robot_hardware/description/urdf/meshes/Component2.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="Component2_collision">
+            <origin xyz="-0.06300000093876953 9.933979985053653e-18 -1.058454243043459e-16" rpy="1.5707963267947935 1.5283000565118283 1.5707963267947935" />
+            <geometry>
+                <mesh filename="package://my_robot_hardware/urdf/meshes/Component2.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="Component3">
+        <inertial>
+            <origin xyz="-0.0007886424011557253 0.0015580377035300363 0.008375687022007288" rpy="0.0 -0.0 1.7516230804060217e-46" />
+            <mass value="0.8807950300955173" />
+            <inertia ixx="0.0005344758739841621" iyy="0.0005081402472842899" izz="0.0009807519381804836" ixy="2.729301839018179e-05" iyz="-1.9642096063161785e-05" ixz="9.942924608684108e-06" />
+        </inertial>
+        <visual name="Component3_visual">
+            <origin xyz="-1.3108966917960693e-16 -1.242785109918427e-17 -0.08500000126659525" rpy="-3.797673495120442e-16 -4.476643978342218e-15 -3.099096383306725" />
+            <geometry>
+                <mesh filename="package://my_robot_hardware/description/urdf/meshes/Component3.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="Component3_collision">
+            <origin xyz="-1.3108966917960693e-16 -1.242785109918427e-17 -0.08500000126659525" rpy="-3.797673495120442e-16 -4.476643978342218e-15 -3.099096383306725" />
+            <geometry>
+                <mesh filename="package://my_robot_hardware/description/urdf/meshes/Component3.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="Component4">
+        <inertial>
+            <origin xyz="0.013748075737572083 -0.029760560473953902 -0.019811113493130694" rpy="0.0 -0.0 0.0" />
+            <mass value="0.6184682868789885" />
+            <inertia ixx="0.0005440588677829115" iyy="0.0007775141443192041" izz="0.0005760836245136454" ixy="9.94493658961855e-06" iyz="-7.625684554984325e-05" ixz="-3.242583717352708e-06" />
+        </inertial>
+        <visual name="Component4_visual">
+            <origin xyz="0.013882699999999628 -0.026594559999999927 0.10326725730081326" rpy="3.1415926535897927 6.881253629370109e-15 3.099096383306725" />
+            <geometry>
+                <mesh filename="package://my_robot_hardware/description/urdf/meshes/Component4.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="Component4_collision">
+            <origin xyz="0.013882699999999628 -0.026594559999999927 0.10326725730081326" rpy="3.1415926535897927 6.881253629370109e-15 3.099096383306725" />
+            <geometry>
+                <mesh filename="package://my_robot_hardware/description/urdf/meshes/Component4.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="Component5">
+        <inertial>
+            <origin xyz="-0.0006683018280100761 -0.015323952737990624 -0.0009955978719707942" rpy="3.0920838838475396e-90 -0.0 0.0" />
+            <mass value="0.6082106863628858" />
+            <inertia ixx="0.0002283636801850259" iyy="0.00041029589506225313" izz="0.00024020671057143125" ixy="-1.5470283656494187e-06" iyz="6.2705694062590345e-06" ixz="-8.085207438949547e-06" />
+        </inertial>
+        <visual name="Component5_visual">
+            <origin xyz="-0.15112264860497968 0.023513786425360186 0.035483063201822256" rpy="2.952570499959834 1.3427262874177526 2.957353884887777" />
+            <geometry>
+                <mesh filename="package://my_robot_hardware/description/urdf/meshes/Component5.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="Component5_collision">
+            <origin xyz="-0.15112264860497968 0.023513786425360186 0.035483063201822256" rpy="2.952570499959834 1.3427262874177526 2.957353884887777" />
+            <geometry>
+                <mesh filename="package://my_robot_hardware/description/urdf/meshes/Component5.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="Component6">
+        <inertial>
+            <origin xyz="-0.00283291994658379 -0.014279646362181226 -0.0006009546680233323" rpy="3.0920838838475396e-90 -0.0 0.0" />
+            <mass value="0.8292297988354185" />
+            <inertia ixx="0.0005834388068200032" iyy="0.000940986734438924" izz="0.0004391059977545477" ixy="1.4543106151553362e-05" iyz="2.1347417445775976e-05" ixz="3.9047361154298364e-07" />
+        </inertial>
+        <visual name="Component6_visual">
+            <origin xyz="-0.1602672573008139 4.5346505506138615e-09 -7.916735501878325e-10" rpy="-1.570796326795061 -1.5283000565118345 -1.5707963267947436" />
+            <geometry>
+                <mesh filename="package://my_robot_hardware/description/urdf/meshes/Component6.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="Component6_collision">
+            <origin xyz="-0.1602672573008139 4.5346505506138615e-09 -7.916735501878325e-10" rpy="-1.570796326795061 -1.5283000565118345 -1.5707963267947436" />
+            <geometry>
+                <mesh filename="package://my_robot_hardware/description/urdf/meshes/Component6.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="ak70-10-v1_1">
+        <inertial>
+            <origin xyz="-7.146546050766822e-05 7.146546059160694e-05 0.014729945989910722" rpy="0.0 -0.0 0.0" />
+            <mass value="2.1429063401431327" />
+            <inertia ixx="0.001352590595148548" iyy="0.0013525905928285895" izz="0.001943353163998447" ixy="-3.36623600805629e-06" iyz="3.3580222740980733e-06" ixz="-3.3580222738421545e-06" />
+        </inertial>
+        <visual name="ak70-10-v1_1_visual">
+            <origin xyz="-4.884981308350689e-17 0.0 -0.011199999999999996" rpy="-0.0 1.5707963267948923 0" />
+            <geometry>
+                <mesh filename="package://my_robot_hardware/description/urdf/meshes/ak60-1-v1.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="ak70-10-v1_1_collision">
+            <origin xyz="-4.884981308350689e-17 0.0 -0.011199999999999996" rpy="-0.0 1.5707963267948923 0" />
+            <geometry>
+                <mesh filename="package://my_robot_hardware/description/urdf/meshes/ak60-1-v1.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="ak70-10-v1_2">
+        <inertial>
+            <origin xyz="0.0008327123573129318 7.146546048771185e-05 -0.01790093202006832" rpy="0.0 -0.0 0.0" />
+            <mass value="2.1429063401431327" />
+            <inertia ixx="0.0013533717650108454" iyy="0.0013525905951489493" izz="0.0019425719918165357" ixy="3.220536393237654e-06" iyz="3.49799997046991e-06" ixz="-2.1729090419244698e-05" />
+        </inertial>
+        <visual name="ak70-10-v1_2_visual">
+            <origin xyz="0.0018629057736697058 -1.9984014443252818e-14 -0.04381050376250973" rpy="1.5707963267949068 1.5283000565118277 1.7143410555958367e-14" />
+            <geometry>
+                <mesh filename="package://my_robot_hardware/description/urdf/meshes/ak60-2-v1.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="ak70-10-v1_2_collision">
+            <origin xyz="0.0018629057736697058 -1.9984014443252818e-14 -0.04381050376250973" rpy="1.5707963267949068 1.5283000565118277 1.7143410555958367e-14" />
+            <geometry>
+                <mesh filename="package://my_robot_hardware/description/urdf/meshes/ak60-2-v1.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    
+    
+
+    <joint name="base_link_fixed-4" type="fixed">
+        <origin xyz="0.0 0.0 0.023" rpy="0.0 -0.0 0.0" />
+        <parent link="base_link" />
+        <child link="ak70-10-v1_1" />
+    </joint>
+    <joint name="ak70-10-v1_1_continuous" type="continuous">
+        <origin xyz="0.0 0.0 0.03905" rpy="-3.141592653589793 -1.5707963267948966 0" />
+        <parent link="ak70-10-v1_1" />
+        <child link="Component2" />
+        <axis xyz="-1.0 -0.0 -7.888609052210118e-31" />
+    </joint>
+    <joint name="Component2_fixed-6" type="fixed">
+        <origin xyz="0.02 0.0 1.5777218104420236e-32" rpy="-3.141592653589793 -1.5707963267948966 0" />
+        <parent link="Component2" />
+        <child link="Component3" />
+    </joint>
+    <joint name="Component3_fixed-7" type="fixed">
+        <origin xyz="-0.0138827 -0.02659456 0.01800000000000001" rpy="3.141592653589793 -0.0 -1.6001510861891693e-31" />
+        <parent link="Component3" />
+        <child link="Component4" />
+    </joint>
+    <joint name="Component4_fixed-8" type="fixed">
+        <origin xyz="0.01319128 -0.042854869999999996 -0.056999999999999995" rpy="1.5707963267948966 -0.0 3.2178910748521876e-30" />
+        <parent link="Component4" />
+        <child link="ak70-10-v1_2" />
+    </joint>
+    <joint name="ak70-10-v1_2_continuous-9" type="continuous">
+        <origin xyz="-0.00027189000000000005 0.0 0.0063941300000000005" rpy="-1.5707963267948966 6.902532920683855e-31 -1.5707963267948966" />
+        <parent link="ak70-10-v1_2" />
+        <child link="Component5" />
+        <axis xyz="7.881485638235972e-31 0.9990969999999999 0.042483" />
+    </joint>
+    <joint name="ak70-10-v1_2_fixed-10" type="fixed">
+        <origin xyz="0.0013870900000000001 0.0 -0.03262062" rpy="1.5707963267948966 6.902532920683855e-31 -1.5707963267948966" />
+        <parent link="ak70-10-v1_2" />
+        <child link="Component6" />
+    </joint>
+</robot>
