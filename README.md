@@ -1,5 +1,12 @@
-# ros2_control_demo_example_1
+# sfbot_control
 
-   *RRBot* - or ''Revolute-Revolute Manipulator Robot'' - a simple position controlled robot with one hardware interface. This example also demonstrates the switching between different controllers.
+   ros2_control 프레임워크를 이용하여 SFBot 개발을 위한 연습 과정입니다. 2자유도를 가진 모터를 제어합니다.
 
-Find the documentation in [doc/userdoc.rst](doc/userdoc.rst) or on [control.ros.org](https://control.ros.org/master/doc/ros2_control_demos/example_1/doc/userdoc.html).
+   개발자 : foody-j
+
+
+Hardware Interface Class : SfBotSystemHardware
+namespace : sfbot_control 
+
+CAN Communication driver header : motor_can_driver.hpp
+Motor Data Structure header : motor_data.hpp
