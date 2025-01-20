@@ -37,21 +37,7 @@ namespace sfbot_control
   // RRBot 시스템의 위치 제어만을 위한 하드웨어 인터페이스 클래스
 class SfBotSystemHardware : public hardware_interface::SystemInterface
 {
-  // 로봇 설정을 위한 구조체 정의
-struct Config
-{
-  std::string left_wheel_name = ""; // 왼쪽 바퀴 이름.
-  std::string right_wheel_name = "";  // 오른쪽 바퀴 이름
-  float loop_rate = 0.0;  // 제어 루프 주기
-  std::string device = "";  // 통신 장치 경로
-  int baud_rate = 0;  // 통신 속도
-  int timeout_ms = 0; // 통신 타임아웃 시간
-  int enc_counts_per_rev = 0;
-  int pid_p = 0;
-  int pid_d = 0;
-  int pid_i = 0;
-  int pid_o = 0;
-};
+
   
 public:
   // 공유 포인터 정의를 위한 매크로
@@ -79,6 +65,8 @@ public:
 private:
   // Parameters for the RRBot simulation
   CanComms can_driver;  // CAN 통신 객체
+  MotorDataManager motor_manager_;
+
 };
 
 }  // namespace ros2_control_demo_example_1

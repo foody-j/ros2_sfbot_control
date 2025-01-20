@@ -63,8 +63,8 @@ hardware_interface::CallbackReturn SfBotSystemHardware::on_init(
   }
   
 
-  wheel_l_.setup(cfg_.left_wheel_name, cfg_.enc_counts_per_rev);
-  wheel_r_.setup(cfg_.right_wheel_name, cfg_.enc_counts_per_rev);
+  // wheel_l_.setup(cfg_.left_wheel_name, cfg_.enc_counts_per_rev);
+  // wheel_r_.setup(cfg_.right_wheel_name, cfg_.enc_counts_per_rev);
 
   // END: This part here is for exemplary purposes - Please do not copy to your production code
 
