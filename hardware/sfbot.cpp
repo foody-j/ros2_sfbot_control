@@ -33,7 +33,7 @@
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
 #include "rclcpp/rclcpp.hpp"
 
-namespace sfbot_control
+namespace sfbot_can
 {
   // 하드웨어 초기화 함수 구현 ..
 hardware_interface::CallbackReturn SfBotSystemHardware::on_init(
@@ -142,11 +142,10 @@ hardware_interface::CallbackReturn SfBotSystemHardware::on_activate(
   RCLCPP_INFO(get_logger(), "Activating ...please wait...");
   
   // CAN 드라이버 초기화 및 연결
-  can_driver.connect("can0", 1000000)
+  can_driver.connect("can0", 1000000);
   std::this_thread::sleep_for(std::chrono::seconds(1));
   if (!can_driver.connected()) {
     std::cerr << "Failed to connect to CAN bus\n";
-    return 1;
   }
   RCLCPP_INFO(get_logger(), "Successfully activated!");
 

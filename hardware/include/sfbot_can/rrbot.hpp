@@ -29,7 +29,7 @@
 
 namespace sfbot_can
 {
-class RRBotSystemPositionOnlyHardware : public hardware_interface::SystemInterface
+class SfBotSystemHardware : public hardware_interface::SystemInterface
 {
 struct Config
 {
@@ -47,7 +47,7 @@ struct Config
 };
   
 public:
-  RCLCPP_SHARED_PTR_DEFINITIONS(RRBotSystemPositionOnlyHardware);
+  RCLCPP_SHARED_PTR_DEFINITIONS(SfBotSystemHardware);
 
   hardware_interface::CallbackReturn on_init(
     const hardware_interface::HardwareInfo & info) override;

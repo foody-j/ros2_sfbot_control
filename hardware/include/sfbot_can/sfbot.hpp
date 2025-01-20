@@ -32,7 +32,7 @@
 
 
 // ROS 2 컨트롤 데모 예제 1의 네임스페이스 시작
-namespace sfbot_control
+namespace sfbot_can
 {
   // RRBot 시스템의 위치 제어만을 위한 하드웨어 인터페이스 클래스
 class SfBotSystemHardware : public hardware_interface::SystemInterface
@@ -41,7 +41,7 @@ class SfBotSystemHardware : public hardware_interface::SystemInterface
   
 public:
   // 공유 포인터 정의를 위한 매크로
-  RCLCPP_SHARED_PTR_DEFINITIONS(RRBotSystemPositionOnlyHardware);
+  RCLCPP_SHARED_PTR_DEFINITIONS(SfBotSystemHardware);
   
   // 하드웨어 초기화 콜백 함수
   hardware_interface::CallbackReturn on_init(
@@ -66,6 +66,7 @@ private:
   // Parameters for the RRBot simulation
   CanComms can_driver;  // CAN 통신 객체
   MotorDataManager motor_manager_;
+  int hw_start_sec_ = 2;  // 또는 원하는 값으로 설정
 
 };
 

@@ -33,12 +33,12 @@ endforeach()
 
 ## COMPILE
 add_library(
-  sfbot_control
+  sfbot_can
   SHARED
   hardware/sfbot.cpp
 )
-target_compile_features(sfbot_control PUBLIC cxx_std_17)
-target_include_directories(sfbot_control PUBLIC
+target_compile_features(sfbot_can PUBLIC cxx_std_17)
+target_include_directories(sfbot_can PUBLIC
 $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/hardware/include>
 $<INSTALL_INTERFACE:include/sfbot_can>
 )
@@ -48,7 +48,7 @@ ament_target_dependencies(
 )
 
 # Export hardware plugins
-pluginlib_export_plugin_description_file(hardware_interface sfbot_control.xml)
+pluginlib_export_plugin_description_file(hardware_interface sfbot_can.xml)
 
 # INSTALL
 install(
@@ -57,13 +57,13 @@ install(
 )
 install(
   DIRECTORY description/launch description/ros2_control description/urdf
-  DESTINATION share/sfbot_control
+  DESTINATION share/sfbot_can
 )
 install(
   DIRECTORY bringup/launch bringup/config
-  DESTINATION share/sfbot_control
+  DESTINATION share/sfbot_can
 )
-install(TARGETS sfbot_control
+install(TARGETS sfbot_can
   EXPORT export_sfbot_control
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
