@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="sfbot">
 
-    <link name="world" /link>
+    <link name="world" />
 
     <joint name="base_joint" type="fixed">
         <origin xyz="1.5 1.0 0" rpy="0 0 0"/>
@@ -18,13 +18,13 @@
         <visual name="base_link_visual">
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
             <geometry>
-                <mesh filename="package://my_robot_hardware/urdf/meshes/base_link.stl" scale="0.001 0.001 0.001" />
+                <mesh filename="package://sfbot_can/description/urdf/meshes/base_link.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </visual>
         <collision name="base_link_collision">
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
             <geometry>
-                <mesh filename="package://my_robot_hardware/urdf/meshes/base_link.stl" scale="0.001 0.001 0.001" />
+                <mesh filename="package://sfbot_can/description/urdf/meshes/base_link.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -38,13 +38,13 @@
         <visual name="Component2_visual">
             <origin xyz="-0.06300000093876953 9.933979985053653e-18 -1.058454243043459e-16" rpy="1.5707963267947935 1.5283000565118283 1.5707963267947935" />
             <geometry>
-                <mesh filename="package://my_robot_hardware/description/urdf/meshes/Component2.stl" scale="0.001 0.001 0.001" />
+                <mesh filename="package://sfbot_can/description/urdf/meshes/Component2.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </visual>
         <collision name="Component2_collision">
             <origin xyz="-0.06300000093876953 9.933979985053653e-18 -1.058454243043459e-16" rpy="1.5707963267947935 1.5283000565118283 1.5707963267947935" />
             <geometry>
-                <mesh filename="package://my_robot_hardware/urdf/meshes/Component2.stl" scale="0.001 0.001 0.001" />
+                <mesh filename="package://sfbot_can/description/urdf/meshes/Component2.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -58,13 +58,13 @@
         <visual name="Component3_visual">
             <origin xyz="-1.3108966917960693e-16 -1.242785109918427e-17 -0.08500000126659525" rpy="-3.797673495120442e-16 -4.476643978342218e-15 -3.099096383306725" />
             <geometry>
-                <mesh filename="package://my_robot_hardware/description/urdf/meshes/Component3.stl" scale="0.001 0.001 0.001" />
+                <mesh filename="package://sfbot_can/description/urdf/meshes/Component3.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </visual>
         <collision name="Component3_collision">
             <origin xyz="-1.3108966917960693e-16 -1.242785109918427e-17 -0.08500000126659525" rpy="-3.797673495120442e-16 -4.476643978342218e-15 -3.099096383306725" />
             <geometry>
-                <mesh filename="package://my_robot_hardware/description/urdf/meshes/Component3.stl" scale="0.001 0.001 0.001" />
+                <mesh filename="package://sfbot_can/description/urdf/meshes/Component3.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -77,13 +77,13 @@
         <visual name="Component4_visual">
             <origin xyz="0.013882699999999628 -0.026594559999999927 0.10326725730081326" rpy="3.1415926535897927 6.881253629370109e-15 3.099096383306725" />
             <geometry>
-                <mesh filename="package://my_robot_hardware/description/urdf/meshes/Component4.stl" scale="0.001 0.001 0.001" />
+                <mesh filename="package://sfbot_can/description/urdf/meshes/Component4.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </visual>
         <collision name="Component4_collision">
             <origin xyz="0.013882699999999628 -0.026594559999999927 0.10326725730081326" rpy="3.1415926535897927 6.881253629370109e-15 3.099096383306725" />
             <geometry>
-                <mesh filename="package://my_robot_hardware/description/urdf/meshes/Component4.stl" scale="0.001 0.001 0.001" />
+                <mesh filename="package://sfbot_can/description/urdf/meshes/Component4.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -96,13 +96,13 @@
         <visual name="Component5_visual">
             <origin xyz="-0.15112264860497968 0.023513786425360186 0.035483063201822256" rpy="2.952570499959834 1.3427262874177526 2.957353884887777" />
             <geometry>
-                <mesh filename="package://my_robot_hardware/description/urdf/meshes/Component5.stl" scale="0.001 0.001 0.001" />
+                <mesh filename="package://sfbot_can/description/urdf/meshes/Component5.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </visual>
         <collision name="Component5_collision">
             <origin xyz="-0.15112264860497968 0.023513786425360186 0.035483063201822256" rpy="2.952570499959834 1.3427262874177526 2.957353884887777" />
             <geometry>
-                <mesh filename="package://my_robot_hardware/description/urdf/meshes/Component5.stl" scale="0.001 0.001 0.001" />
+                <mesh filename="package://sfbot_can/description/urdf/meshes/Component5.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -115,13 +115,13 @@
         <visual name="Component6_visual">
             <origin xyz="-0.1602672573008139 4.5346505506138615e-09 -7.916735501878325e-10" rpy="-1.570796326795061 -1.5283000565118345 -1.5707963267947436" />
             <geometry>
-                <mesh filename="package://my_robot_hardware/description/urdf/meshes/Component6.stl" scale="0.001 0.001 0.001" />
+                <mesh filename="package://sfbot_can/description/urdf/meshes/Component6.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </visual>
         <collision name="Component6_collision">
             <origin xyz="-0.1602672573008139 4.5346505506138615e-09 -7.916735501878325e-10" rpy="-1.570796326795061 -1.5283000565118345 -1.5707963267947436" />
             <geometry>
-                <mesh filename="package://my_robot_hardware/description/urdf/meshes/Component6.stl" scale="0.001 0.001 0.001" />
+                <mesh filename="package://sfbot_can/description/urdf/meshes/Component6.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -135,13 +135,13 @@
         <visual name="ak70-10-v1_1_visual">
             <origin xyz="-4.884981308350689e-17 0.0 -0.011199999999999996" rpy="-0.0 1.5707963267948923 0" />
             <geometry>
-                <mesh filename="package://my_robot_hardware/description/urdf/meshes/ak60-1-v1.stl" scale="0.001 0.001 0.001" />
+                <mesh filename="package://sfbot_can/description/urdf/meshes/ak60-1-v1.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </visual>
         <collision name="ak70-10-v1_1_collision">
             <origin xyz="-4.884981308350689e-17 0.0 -0.011199999999999996" rpy="-0.0 1.5707963267948923 0" />
             <geometry>
-                <mesh filename="package://my_robot_hardware/description/urdf/meshes/ak60-1-v1.stl" scale="0.001 0.001 0.001" />
+                <mesh filename="package://sfbot_can/description/urdf/meshes/ak60-1-v1.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -154,13 +154,13 @@
         <visual name="ak70-10-v1_2_visual">
             <origin xyz="0.0018629057736697058 -1.9984014443252818e-14 -0.04381050376250973" rpy="1.5707963267949068 1.5283000565118277 1.7143410555958367e-14" />
             <geometry>
-                <mesh filename="package://my_robot_hardware/description/urdf/meshes/ak60-2-v1.stl" scale="0.001 0.001 0.001" />
+                <mesh filename="package://sfbot_can/description/urdf/meshes/ak60-2-v1.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </visual>
         <collision name="ak70-10-v1_2_collision">
             <origin xyz="0.0018629057736697058 -1.9984014443252818e-14 -0.04381050376250973" rpy="1.5707963267949068 1.5283000565118277 1.7143410555958367e-14" />
             <geometry>
-                <mesh filename="package://my_robot_hardware/description/urdf/meshes/ak60-2-v1.stl" scale="0.001 0.001 0.001" />
+                <mesh filename="package://sfbot_can/description/urdf/meshes/ak60-2-v1.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>

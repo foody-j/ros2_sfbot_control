@@ -55,10 +55,12 @@ install(
   DIRECTORY hardware/include/
   DESTINATION include/sfbot_can
 )
+
 install(
-  DIRECTORY description/launch description/ros2_control description/urdf
+  DIRECTORY description
   DESTINATION share/sfbot_can
 )
+
 install(
   DIRECTORY bringup/launch bringup/config
   DESTINATION share/sfbot_can
