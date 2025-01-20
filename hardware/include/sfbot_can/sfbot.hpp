@@ -69,6 +69,6 @@ private:
 
 };
 
-}  // namespace ros2_control_demo_example_1
+}  // namespace sfbot_can
 
-#endif  // ROS2_CONTROL_DEMO_EXAMPLE_1__RRBOT_HPP_
+#endif  // SFBOT_CAN__RRBOT_HPP_

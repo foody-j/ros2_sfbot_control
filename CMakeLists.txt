@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(ros2_control_demo_example_1 LANGUAGES CXX)
+project(sfbot_can LANGUAGES CXX)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "(GNU|Clang)")
   add_compile_options(-Wall -Wextra)
@@ -33,38 +33,38 @@ endforeach()
 
 ## COMPILE
 add_library(
-  ros2_control_demo_example_1
+  sfbot_control
   SHARED
-  hardware/rrbot.cpp
+  hardware/sfbot.cpp
 )
-target_compile_features(ros2_control_demo_example_1 PUBLIC cxx_std_17)
-target_include_directories(ros2_control_demo_example_1 PUBLIC
+target_compile_features(sfbot_control PUBLIC cxx_std_17)
+target_include_directories(sfbot_control PUBLIC
 $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/hardware/include>
-$<INSTALL_INTERFACE:include/ros2_control_demo_example_1>
+$<INSTALL_INTERFACE:include/sfbot_can>
 )
 ament_target_dependencies(
-  ros2_control_demo_example_1 PUBLIC
+  sfbot_can PUBLIC
   ${THIS_PACKAGE_INCLUDE_DEPENDS}
 )
 
 # Export hardware plugins
-pluginlib_export_plugin_description_file(hardware_interface ros2_control_demo_example_1.xml)
+pluginlib_export_plugin_description_file(hardware_interface sfbot_control.xml)
 
 # INSTALL
 install(
   DIRECTORY hardware/include/
-  DESTINATION include/ros2_control_demo_example_1
+  DESTINATION include/sfbot_can
 )
 install(
   DIRECTORY description/launch description/ros2_control description/urdf
-  DESTINATION share/ros2_control_demo_example_1
+  DESTINATION share/sfbot_control
 )
 install(
   DIRECTORY bringup/launch bringup/config
-  DESTINATION share/ros2_control_demo_example_1
+  DESTINATION share/sfbot_control
 )
-install(TARGETS ros2_control_demo_example_1
-  EXPORT export_ros2_control_demo_example_1
+install(TARGETS sfbot_control
+  EXPORT export_sfbot_control
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin
@@ -81,6 +81,6 @@ endif()
 
 
 ## EXPORTS
-ament_export_targets(export_ros2_control_demo_example_1 HAS_LIBRARY_TARGET)
+ament_export_targets(export_sfbot_control HAS_LIBRARY_TARGET)
 ament_export_dependencies(${THIS_PACKAGE_INCLUDE_DEPENDS})
 ament_package()

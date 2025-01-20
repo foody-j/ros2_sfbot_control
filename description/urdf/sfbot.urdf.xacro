@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="robot">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="sfbot">
 
-    <xacro:include filename="sfbot.urdf.xacro" />
-    <xacro:include filename="ros2_control.xacro" />
+    <xacro:include filename="$(find sfbot_control)/urdf/sfbot.urdf.xacro" />
+    <xacro:include filename="$(find sfbot_control)/ros2_control.xacro" />
 
 </robot>

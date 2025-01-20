@@ -44,7 +44,7 @@ def generate_test_description():
     launch_include = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(
-                get_package_share_directory("ros2_control_demo_example_1"),
+                get_package_share_directory("sfbot_can"),
                 "launch/view_robot.launch.py",
             )
         ),

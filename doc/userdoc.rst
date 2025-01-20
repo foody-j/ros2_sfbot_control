@@ -32,7 +32,7 @@ Tutorial steps
 
          .. code-block:: shell
 
-           ros2 launch ros2_control_demo_example_1 view_robot.launch.py
+           ros2 launch sfbot_can view_robot.launch.py
 
       .. group-tab:: Docker
 
@@ -40,7 +40,7 @@ Tutorial steps
 
         .. code-block:: shell
 
-          docker run -it --rm --name ros2_control_demos --net host ros2_control_demos ros2 launch ros2_control_demo_example_1 view_robot.launch.py gui:=false
+          docker run -it --rm --name ros2_control_demos --net host ros2_control_demos ros2 launch sfbot_can view_robot.launch.py gui:=false
 
         Now, we need to start ``joint_state_publisher_gui`` as well as ``rviz2`` to view the robot, each in their own terminals after sourcing our ROS 2 installation.
 
@@ -80,7 +80,7 @@ Tutorial steps
 
         .. code-block:: shell
 
-          ros2 launch ros2_control_demo_example_1 rrbot.launch.py
+          ros2 launch sfbot_can rrbot.launch.py
 
         The launch file loads and starts the robot hardware, controllers and opens *RViz*.
 
@@ -88,7 +88,7 @@ Tutorial steps
 
         .. code-block:: shell
 
-          docker run -it --rm --name ros2_control_demos --net host ros2_control_demos ros2 launch ros2_control_demo_example_1 rrbot.launch.py gui:=false
+          docker run -it --rm --name ros2_control_demos --net host ros2_control_demos ros2 launch sfbot_can rrbot.launch.py gui:=false
 
         The launch file loads and starts the robot hardware and controllers. Open *RViz* in a new terminal
         as described above.
@@ -193,7 +193,7 @@ Tutorial steps
 
         .. code-block:: shell
 
-          ros2 launch ros2_control_demo_example_1 test_forward_position_controller.launch.py
+          ros2 launch sfbot_can test_forward_position_controller.launch.py
 
       .. group-tab:: Docker
 
@@ -201,7 +201,7 @@ Tutorial steps
 
         .. code-block:: shell
 
-          ros2 launch ros2_control_demo_example_1 test_forward_position_controller.launch.py
+          ros2 launch sfbot_can test_forward_position_controller.launch.py
 
    You should now see orange and yellow blocks moving in *RViz*.
    Also, you should see changing states in the terminal where launch file is started, e.g.
@@ -242,7 +242,7 @@ Tutorial steps
 
         .. code-block:: shell
 
-          ros2 control load_controller joint_trajectory_position_controller $(ros2 pkg prefix ros2_control_demo_example_1 --share)/config/rrbot_jtc.yaml
+          ros2 control load_controller joint_trajectory_position_controller $(ros2 pkg prefix sfbot_can --share)/config/rrbot_jtc.yaml
 
       .. group-tab:: Docker
 
@@ -250,7 +250,7 @@ Tutorial steps
 
         .. code-block:: shell
 
-          ros2 control load_controller joint_trajectory_position_controller $(ros2 pkg prefix ros2_control_demo_example_1 --share)/config/rrbot_jtc.yaml
+          ros2 control load_controller joint_trajectory_position_controller $(ros2 pkg prefix sfbot_can --share)/config/rrbot_jtc.yaml
 
    what should return ``Successfully loaded controller joint_trajectory_position_controller``. Check the status with
 
@@ -306,7 +306,7 @@ Tutorial steps
 
         .. code-block:: shell
 
-          ros2 control load_controller --set-state inactive joint_trajectory_position_controller $(ros2 pkg prefix ros2_control_demo_example_1 --share)/config/rrbot_jtc.yaml
+          ros2 control load_controller --set-state inactive joint_trajectory_position_controller $(ros2 pkg prefix sfbot_can --share)/config/rrbot_jtc.yaml
 
       .. group-tab:: Docker
 
@@ -314,7 +314,7 @@ Tutorial steps
 
         .. code-block:: shell
 
-          ros2 control load_controller --set-state inactive joint_trajectory_position_controller $(ros2 pkg prefix ros2_control_demo_example_1 --share)/config/rrbot_jtc.yaml
+          ros2 control load_controller --set-state inactive joint_trajectory_position_controller $(ros2 pkg prefix sfbot_can --share)/config/rrbot_jtc.yaml
 
    You should get the result ``Successfully loaded controller joint_trajectory_position_controller into state inactive``.
 
@@ -416,7 +416,7 @@ Tutorial steps
 
         .. code-block:: shell
 
-          ros2 launch ros2_control_demo_example_1 test_joint_trajectory_controller.launch.py
+          ros2 launch sfbot_can test_joint_trajectory_controller.launch.py
 
       .. group-tab:: Docker
 
@@ -424,7 +424,7 @@ Tutorial steps
 
         .. code-block:: shell
 
-          ros2 launch ros2_control_demo_example_1 test_joint_trajectory_controller.launch.py
+          ros2 launch sfbot_can test_joint_trajectory_controller.launch.py
 
    You can adjust the goals in `rrbot_joint_trajectory_publisher <https://github.com/ros-controls/ros2_control_demos/tree/{REPOS_FILE_BRANCH}/example_1/bringup/config/rrbot_joint_trajectory_publisher.yaml>`__.
 
