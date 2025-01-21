@@ -177,12 +177,13 @@ hardware_interface::return_type SfBotSystemHardware::read(
   for (uint8_t i = 1; i < 3; i++)  // 모터 1번과 2번의 데이터를 가져옴
   {
       MotorData motor_data = can_driver.getMotorData(i);
-      std::cout << "Motor " << i << ": "  // motor_id 대신 i를 사용해야 합니다
+      std::cout << std::dec;  // 10진수 모드로 명시적 설정
+      std::cout << "Motor " << static_cast<int>(motor_data.motor_id) << ": "
           << "Position: " << motor_data.position << "° "
           << "Speed: " << motor_data.speed << " RPM "
           << "Current: " << motor_data.current << "A "
-          << "Temperature: " << (int)motor_data.temperature << "°C "
-          << "Error: 0x" << std::hex << (int)motor_data.error 
+          << "Temperature: " << static_cast<int>(motor_data.temperature) << "°C "
+          << "Error: 0x" << std::hex << static_cast<int>(motor_data.error) 
           << std::dec << std::endl;
   }
 
