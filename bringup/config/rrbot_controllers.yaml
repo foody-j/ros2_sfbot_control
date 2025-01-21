@@ -11,5 +11,4 @@ forward_position_controller:
     type: forward_command_controller/ForwardCommandController
     joints:
       - ak70-10-v1_1_continuous
-      - ak70-10-v1_2_continuous-9
     interface_name: position

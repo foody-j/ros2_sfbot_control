@@ -108,49 +108,104 @@ hardware_interface::CallbackReturn SfBotSystemHardware::on_init(
   return hardware_interface::CallbackReturn::SUCCESS;
 }
 
+/*
+std::vector<hardware_interface::StateInterface> SfBotSystemHardware::export_state_interfaces()
+{
+  std::vector<hardware_interface::StateInterface> state_interfaces;
+
+  state_interfaces.emplace_back(hardware_interface::StateInterface(
+  "ak70-10-v1_1_continuous", hardware_interface::HW_IF_POSITION, &pos_[0]));
+  //state_interfaces.emplace_back(hardware_interface::StateInterface(
+  //"ak70-10-v1_1_continuous", hardware_interface::HW_IF_VELOCITY, &wheel_l_.vel));
+
+  //state_interfaces.emplace_back(hardware_interface::StateInterface(
+  //  wheel_r_.name, hardware_interface::HW_IF_POSITION, &wheel_r_.pos));
+  //state_interfaces.emplace_back(hardware_interface::StateInterface(
+  //wheel_r_.name, hardware_interface::HW_IF_VELOCITY, &wheel_r_.vel));
+
+  return state_interfaces;
+}
+// 위치 명령 인터페이스
+std::vector<hardware_interface::CommandInterface> SfBotSystemHardware::export_command_interfaces()
+{
+  std::vector<hardware_interface::CommandInterface> command_interfaces;
+
+  command_interfaces.emplace_back(hardware_interface::CommandInterface(
+    "ak70-10-v1_1_continuous", hardware_interface::HW_IF_POSITION, &cmd_[0]));
+  //command_interfaces.emplace_back(hardware_interface::CommandInterface(
+  //wheel_r_.name, hardware_interface::HW_IF_VELOCITY, &wheel_r_.cmd));
+
+  return command_interfaces;
+}*/
+// 멤버 함수로 정확히 정의
+std::vector<hardware_interface::StateInterface> SfBotSystemHardware::export_state_interfaces()
+{
+    std::vector<hardware_interface::StateInterface> state_interfaces;
+    state_interfaces.emplace_back(hardware_interface::StateInterface(
+        "ak70-10-v1_1_continuous", hardware_interface::HW_IF_POSITION, &pos_[0]));
+    return state_interfaces;
+}
+
+std::vector<hardware_interface::CommandInterface> SfBotSystemHardware::export_command_interfaces()
+{
+    std::vector<hardware_interface::CommandInterface> command_interfaces;
+    command_interfaces.emplace_back(hardware_interface::CommandInterface(
+        "ak70-10-v1_1_continuous", hardware_interface::HW_IF_POSITION, &cmd_[0]));
+    return command_interfaces;
+}
+
 hardware_interface::CallbackReturn SfBotSystemHardware::on_configure(
   const rclcpp_lifecycle::State & /*previous_state*/)
 {
-  // BEGIN: This part here is for exemplary purposes - Please do not copy to your production code
-  RCLCPP_INFO(get_logger(), "Configuring ...please wait...");
+  RCLCPP_INFO(rclcpp::get_logger("DiffDriveArduinoHardware"), "Configuring ...please wait...");
+  if (can_driver.connected())
+  {
+    can_driver.disconnect();
+  }
+  can_driver.connect("can0", 1000000);
+  RCLCPP_INFO(rclcpp::get_logger("DiffDriveArduinoHardware"), "Successfully configured!");
 
-  for (int i = 0; i < hw_start_sec_; i++)
-  {
-    rclcpp::sleep_for(std::chrono::seconds(1));
-    RCLCPP_INFO(get_logger(), "%.1f seconds left...", hw_start_sec_ - i);
-  }
-  // END: This part here is for exemplary purposes - Please do not copy to your production code
+  return hardware_interface::CallbackReturn::SUCCESS;
+}
 
-  // reset values always when configuring hardware
-  for (const auto & [name, descr] : joint_state_interfaces_)
+hardware_interface::CallbackReturn SfBotSystemHardware::on_cleanup(
+  const rclcpp_lifecycle::State & /*previous_state*/)
+{
+  RCLCPP_INFO(rclcpp::get_logger("DiffDriveArduinoHardware"), "Cleaning up ...please wait...");
+  if (can_driver.connected())
   {
-    set_state(name, 0.0);
+    can_driver.disconnect();
   }
-  for (const auto & [name, descr] : joint_command_interfaces_)
-  {
-    set_command(name, 0.0);
-  }
-  RCLCPP_INFO(get_logger(), "Successfully configured!");
+  RCLCPP_INFO(rclcpp::get_logger("DiffDriveArduinoHardware"), "Successfully cleaned up!");
 
   return hardware_interface::CallbackReturn::SUCCESS;
 }
 
 hardware_interface::CallbackReturn SfBotSystemHardware::on_activate(
-  const rclcpp_lifecycle::State & /*previous_state*/)
-{
-  // BEGIN: This part here is for exemplary purposes - Please do not copy to your production code
-  RCLCPP_INFO(get_logger(), "Activating ...please wait...");
-  
-  // CAN 드라이버 초기화 및 연결
-  can_driver.connect("can0", 1000000);
-  std::this_thread::sleep_for(std::chrono::seconds(1));
-  if (!can_driver.connected()) {
-    std::cerr << "Failed to connect to CAN bus\n";
-  }
-  RCLCPP_INFO(get_logger(), "Successfully activated!");
-
-  return hardware_interface::CallbackReturn::SUCCESS;
+  const rclcpp_lifecycle::State & /*previous_state*/) {
+    RCLCPP_INFO(get_logger(), "Activating ...please wait...");
+    
+    if (!can_driver.connected()) {
+        can_driver.connect("can0", 1000000);
+    }
+    
+    // 원점 설정 전에 연결 확인
+    if (!can_driver.connected()) {
+        RCLCPP_ERROR(get_logger(), "Failed to connect to CAN bus");
+        return hardware_interface::CallbackReturn::ERROR;
+    }
+    
+    if (can_driver.initialize_motor_origin(1)) {
+        RCLCPP_INFO(get_logger(), "Motor Origin initialization Successful");
+    } else {
+        RCLCPP_ERROR(get_logger(), "Failed to initialize motor origin");
+        return hardware_interface::CallbackReturn::ERROR;
+    }
+    
+    RCLCPP_INFO(get_logger(), "Successfully activated!");
+    return hardware_interface::CallbackReturn::SUCCESS;
 }
+
 
 hardware_interface::CallbackReturn SfBotSystemHardware::on_deactivate(
   const rclcpp_lifecycle::State & /*previous_state*/)
@@ -176,11 +231,14 @@ hardware_interface::return_type SfBotSystemHardware::read(
   }
   for (uint8_t i = 1; i < 3; i++)  // 모터 1번과 2번의 데이터를 가져옴
   {
-      MotorData motor_data = can_driver.getMotorData(i);
+      motor_data = can_driver.getMotorData(i);
+      pos_[i-1] = motor_data.position;
+      spd_[i-1] = motor_data.speed;
+      
       std::cout << std::dec;  // 10진수 모드로 명시적 설정
       std::cout << "Motor " << static_cast<int>(motor_data.motor_id) << ": "
-          << "Position: " << motor_data.position << "° "
-          << "Speed: " << motor_data.speed << " RPM "
+          << "Position: " << pos_[i-1] << "° "
+          << "Speed: " << spd_[i-1] << " RPM "
           << "Current: " << motor_data.current << "A "
           << "Temperature: " << static_cast<int>(motor_data.temperature) << "°C "
           << "Error: 0x" << std::hex << static_cast<int>(motor_data.error) 
@@ -208,6 +266,20 @@ hardware_interface::return_type SfBotSystemHardware::read(
 hardware_interface::return_type SfBotSystemHardware::write(
   const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
+  if (!can_driver.connected()) {
+    return hardware_interface::return_type::ERROR;
+  }
+   // 고정된 속도와 가속도 값 설정
+  const float fixed_velocity = 100.0f;  // RPM
+  const float fixed_acceleration = 100.0f;  // RPM/s
+  try {
+      // position-velocity 모드로 명령 전송
+      can_driver.write_position_velocity(1, cmd_[0], fixed_velocity, fixed_acceleration);
+  }
+  catch (const std::exception& e) {
+      RCLCPP_ERROR(rclcpp::get_logger("SfBotSystemHardware"), "Failed to write command: %s", e.what());
+      return hardware_interface::return_type::ERROR;
+  }
   // write 함수는 일단 비움..
   /*int motor_l_counts_per_loop = wheel_l_.cmd / wheel_l_.rads_per_count / cfg_.loop_rate;
   int motor_r_counts_per_loop = wheel_r_.cmd / wheel_r_.rads_per_count / cfg_.loop_rate;

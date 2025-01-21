@@ -13,7 +13,7 @@
 // limitations under the License.
 
 #ifndef ROS2_CONTROL__SFBOT_HPP_
-#define ROS2_CONTROL__RRBOT_HPP_
+#define ROS2_CONTROL__SFBOT_HPP_
 
 #include <memory> // 필요한 C++ 표준 라이브러리 헤더 포함
 #include <string> // 스마트 포인터 사용을 위한 헤더
@@ -46,8 +46,15 @@ public:
   // 하드웨어 초기화 콜백 함수
   hardware_interface::CallbackReturn on_init(
     const hardware_interface::HardwareInfo & info) override;
+  
+  std::vector<hardware_interface::StateInterface> export_state_interfaces() override;
+
+  std::vector<hardware_interface::CommandInterface> export_command_interfaces() override;
   // 하드웨어 설정 콜백 함수
   hardware_interface::CallbackReturn on_configure(
+    const rclcpp_lifecycle::State & previous_state) override;
+  // 하드웨어 클린업 콜백 함수
+  hardware_interface::CallbackReturn on_cleanup(
     const rclcpp_lifecycle::State & previous_state) override;
   // 하드웨어 활성화 콜백 함수
   hardware_interface::CallbackReturn on_activate(
@@ -67,6 +74,12 @@ private:
   CanComms can_driver;  // CAN 통신 객체
   MotorDataManager motor_manager_;
   int hw_start_sec_ = 2;  // 또는 원하는 값으로 설정
+  double pos_[6] = {0.0f};
+  float spd_[6] = {0.0f};
+  double cmd_[6] = {0.0};  // 위치 명령을 저장할 배열
+
+
+  MotorData motor_data;
 
 };
 
