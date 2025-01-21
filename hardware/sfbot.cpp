@@ -197,6 +197,7 @@ hardware_interface::CallbackReturn SfBotSystemHardware::on_activate(
     
     if (can_driver.initialize_motor_origin(1)) {
         RCLCPP_INFO(get_logger(), "Motor Origin initialization Successful");
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
     } else {
         RCLCPP_ERROR(get_logger(), "Failed to initialize motor origin");
         return hardware_interface::CallbackReturn::ERROR;
