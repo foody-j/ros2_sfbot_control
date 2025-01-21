@@ -15,33 +15,4 @@ Motor Data Structure header : motor_data.hpp
    2025.01.21  
    motor_data.hpp 파일 수정  
       MotorData 구조체에 motor_id 추가  
-      
-      struct MotorData {
-         uint8_t motor_id{0};     // 모터 ID (1~6)
-      }
-
-      static constexpr size_t MAX_MOTORS = 6;
-    
-      MotorData& getMotorData(uint8_t motor_id) {
-         if (motor_id < 1 || motor_id > MAX_MOTORS) {
-               throw std::runtime_error("Invalid motor ID");
-         }
-         motor_data_[motor_id - 1].motor_id = motor_id; // ID 자동 설정
-         return motor_data_[motor_id - 1];
-      }
-
-      void updateMotorData(uint8_t motor_id, const MotorData& data) {
-         if (motor_id < 1 || motor_id > MAX_MOTORS) {
-               throw std::runtime_error("Invalid motor ID");
-         }
-         motor_data_[motor_id - 1] = data;
-         motor_data_[motor_id - 1].motor_id = motor_id; // ID 보장
-      }
-
-      void reset() {
-         for (uint8_t i = 0; i < MAX_MOTORS; ++i) {
-               motor_data_[i] = MotorData{};
-               motor_data_[i].motor_id = i + 1; // 리셋 시에도 ID 유지
-         }
-      }
-
+      편의 함수 추가
