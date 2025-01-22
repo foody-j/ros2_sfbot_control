@@ -274,8 +274,10 @@ hardware_interface::return_type SfBotSystemHardware::write(
   const float fixed_velocity = 100.0f;  // RPM
   const float fixed_acceleration = 100.0f;  // RPM/s
   try {
+    // radian to degree 변환 추가
+      double degree = cmd_[0] * 180.0 / M_PI;  // cmd_[0]는 radian 값을 degree로 변환
       // position-velocity 모드로 명령 전송
-      can_driver.write_position_velocity(1, cmd_[0], fixed_velocity, fixed_acceleration);
+      can_driver.write_position_velocity(1, degree, fixed_velocity, fixed_acceleration);
   }
   catch (const std::exception& e) {
       RCLCPP_ERROR(rclcpp::get_logger("SfBotSystemHardware"), "Failed to write command: %s", e.what());
