@@ -93,7 +93,6 @@ def generate_launch_description():
         arguments=["joint_trajectory_controller", "--controller-manager", "/controller_manager"],
         output="screen",
     )
-
     # 실행 순서 제어
     delay_trajectory_controller = RegisterEventHandler(
         event_handler=OnProcessExit(
@@ -107,6 +106,7 @@ def generate_launch_description():
         robot_state_pub_node,
         joint_state_broadcaster_spawner,
         delay_trajectory_controller,
+
     ]
 
     return LaunchDescription(declared_arguments + nodes)
