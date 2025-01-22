@@ -77,7 +77,8 @@ private:
   double pos_[6] = {0.0f};
   float spd_[6] = {0.0f};
   double cmd_[6] = {0.0};  // 위치 명령을 저장할 배열
-
+  float velocity_;      // RPM
+  float acceleration_;  // RPM/s
 
   MotorData motor_data;
 

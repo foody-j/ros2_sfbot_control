@@ -198,6 +198,10 @@ hardware_interface::CallbackReturn SfBotSystemHardware::on_activate(
     if (can_driver.initialize_motor_origin(1)) {
         RCLCPP_INFO(get_logger(), "Motor Origin initialization Successful");
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        // 여기에 속도와 가속도 초기화 추가
+        velocity_ = 100.0f;  // RPM
+        acceleration_ = 100.0f;  // RPM/s
+        can_driver.write_position_velocity(1, 0.0, velocity_, acceleration_);
     } else {
         RCLCPP_ERROR(get_logger(), "Failed to initialize motor origin");
         return hardware_interface::CallbackReturn::ERROR;
@@ -270,14 +274,11 @@ hardware_interface::return_type SfBotSystemHardware::write(
   if (!can_driver.connected()) {
     return hardware_interface::return_type::ERROR;
   }
-   // 고정된 속도와 가속도 값 설정
-  const float fixed_velocity = 100.0f;  // RPM
-  const float fixed_acceleration = 100.0f;  // RPM/s
   try {
     // radian to degree 변환 추가
       double degree = cmd_[0] * 180.0 / M_PI;  // cmd_[0]는 radian 값을 degree로 변환
       // position-velocity 모드로 명령 전송
-      can_driver.write_position_velocity(1, degree, fixed_velocity, fixed_acceleration);
+      can_driver.write_position_velocity(1, degree, velocity_, acceleration_);
   }
   catch (const std::exception& e) {
       RCLCPP_ERROR(rclcpp::get_logger("SfBotSystemHardware"), "Failed to write command: %s", e.what());
