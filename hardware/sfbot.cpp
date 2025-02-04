@@ -237,7 +237,7 @@ hardware_interface::return_type SfBotSystemHardware::read(
   for (uint8_t i = 1; i < 3; i++)  // 모터 1번과 2번의 데이터를 가져옴
   {
       motor_data = can_driver.getMotorData(i);
-      pos_[i-1] = motor_data.position;
+      pos_[i-1] = motor_data.position * M_PI / 180.0;  // degree를 radian으로 변환
       spd_[i-1] = motor_data.speed;
       
       std::cout << std::dec;  // 10진수 모드로 명시적 설정
