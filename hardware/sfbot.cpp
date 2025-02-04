@@ -199,8 +199,8 @@ hardware_interface::CallbackReturn SfBotSystemHardware::on_activate(
         RCLCPP_INFO(get_logger(), "Motor Origin initialization Successful");
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
         // 여기에 속도와 가속도 초기화 추가
-        velocity_ = 500.0f;  // RPM
-        acceleration_ = 300.0f;  // RPM/s
+        velocity_ = 1000.0f;  // RPM
+        acceleration_ = 1000.0f;  // RPM/s
         can_driver.write_position_velocity(1, 0.0, velocity_, acceleration_);
     } else {
         RCLCPP_ERROR(get_logger(), "Failed to initialize motor origin");

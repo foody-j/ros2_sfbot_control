@@ -1,7 +1,7 @@
 #sfbot_can/bringup/config/rrbot_controllers.yaml
 controller_manager:
   ros__parameters:
-    update_rate: 10  # Hz
+    update_rate: 50  # Hz
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
@@ -24,11 +24,11 @@ joint_trajectory_controller:
     allow_partial_joints_goal: false
     open_loop_control: false
     constraints:
-      stopped_velocity_tolerance: 0.01
-      goal_time: 1.0
+      stopped_velocity_tolerance: 1.0
+      goal_time: 2.0
       ak70-10-v1_1_continuous:
-        trajectory: 0.2
-        goal: 0.5
+        trajectory: 3.5
+        goal: 3.5
 
 forward_position_controller:
   ros__parameters:
