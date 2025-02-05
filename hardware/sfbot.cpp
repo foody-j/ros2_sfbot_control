@@ -143,6 +143,8 @@ std::vector<hardware_interface::StateInterface> SfBotSystemHardware::export_stat
     std::vector<hardware_interface::StateInterface> state_interfaces;
     state_interfaces.emplace_back(hardware_interface::StateInterface(
         "ak70-10-v1_1_continuous", hardware_interface::HW_IF_POSITION, &pos_[0]));
+    state_interfaces.emplace_back(hardware_interface::StateInterface(
+        "ak70-10-v1_2_continuous-9", hardware_interface::HW_IF_POSITION, &pos_[1]));
     return state_interfaces;
 }
 
@@ -151,6 +153,8 @@ std::vector<hardware_interface::CommandInterface> SfBotSystemHardware::export_co
     std::vector<hardware_interface::CommandInterface> command_interfaces;
     command_interfaces.emplace_back(hardware_interface::CommandInterface(
         "ak70-10-v1_1_continuous", hardware_interface::HW_IF_POSITION, &cmd_[0]));
+    command_interfaces.emplace_back(hardware_interface::CommandInterface(
+        "ak70-10-v1_2_continuous-9", hardware_interface::HW_IF_POSITION, &cmd_[1]));
     return command_interfaces;
 }
 
@@ -184,7 +188,10 @@ hardware_interface::CallbackReturn SfBotSystemHardware::on_cleanup(
 hardware_interface::CallbackReturn SfBotSystemHardware::on_activate(
   const rclcpp_lifecycle::State & /*previous_state*/) {
     RCLCPP_INFO(get_logger(), "Activating ...please wait...");
-    
+    // 여기에 속도와 가속도 초기화 추가
+    velocity_ = 1000.0f;  // RPM
+    acceleration_ = 1000.0f;  // RPM/s    
+
     if (!can_driver.connected()) {
         can_driver.connect("can0", 1000000);
     }
@@ -198,11 +205,16 @@ hardware_interface::CallbackReturn SfBotSystemHardware::on_activate(
     if (can_driver.initialize_motor_origin(1)) {
         RCLCPP_INFO(get_logger(), "Motor Origin initialization Successful");
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
-        // 여기에 속도와 가속도 초기화 추가
-        velocity_ = 1000.0f;  // RPM
-        acceleration_ = 1000.0f;  // RPM/s
         can_driver.write_position_velocity(1, 0.0, velocity_, acceleration_);
-    } else {
+
+    }
+    if (can_driver.initialize_motor_origin(2)) {
+    RCLCPP_INFO(get_logger(), "Motor Origin initialization Successful");
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    can_driver.write_position_velocity(2, 0.0, velocity_, acceleration_);
+
+    }
+    else {
         RCLCPP_ERROR(get_logger(), "Failed to initialize motor origin");
         return hardware_interface::CallbackReturn::ERROR;
     }
@@ -276,9 +288,12 @@ hardware_interface::return_type SfBotSystemHardware::write(
   }
   try {
     // radian to degree 변환 추가
-      double degree = cmd_[0] * 180.0 / M_PI;  // cmd_[0]는 radian 값을 degree로 변환
+      double degree1 = cmd_[0] * 180.0 / M_PI;  // cmd_[0]는 radian 값을 degree로 변환
       // position-velocity 모드로 명령 전송
-      can_driver.write_position_velocity(1, degree, velocity_, acceleration_);
+      can_driver.write_position_velocity(1, degree1, velocity_, acceleration_);
+
+      double degree2 = cmd_[1] * 180.0 / M_PI;  
+      can_driver.write_position_velocity(2, degree2, velocity_, acceleration_);
   }
   catch (const std::exception& e) {
       RCLCPP_ERROR(rclcpp::get_logger("SfBotSystemHardware"), "Failed to write command: %s", e.what());

@@ -16,6 +16,7 @@ joint_trajectory_controller:
   ros__parameters:
     joints:
       - ak70-10-v1_1_continuous
+      - ak70-10-v1_2_continuous-9
     command_interfaces:
       - position
     state_interfaces:
@@ -29,14 +30,19 @@ joint_trajectory_controller:
       ak70-10-v1_1_continuous:
         trajectory: 3.5
         goal: 3.5
+      ak70-10-v1_2_continuous-9:
+        trajectory: 3.5
+        goal: 3.5 
 
 forward_position_controller:
   ros__parameters:
     joints:
       - ak70-10-v1_1_continuous
+      - ak70-10-v1_2_continuous-9
     interface_name: position
 
 joint_state_broadcaster:
   ros__parameters:
     joints:
       - ak70-10-v1_1_continuous
+      - ak70-10-v1_2_continuous-9
