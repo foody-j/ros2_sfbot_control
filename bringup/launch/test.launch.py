@@ -46,7 +46,7 @@ def generate_launch_description():
                 [
                     FindPackageShare("sfbot_can"),
                     "description/urdf",
-                    "test.urdf.xacro",
+                    "sfbot.urdf.xacro",
                 ]
             ),
         ]
@@ -57,7 +57,7 @@ def generate_launch_description():
         [
             FindPackageShare("sfbot_can"),
             "config",
-            "rrbot_controllers.yaml",
+            "test_controllers.yaml",
         ]
     )
     # rviz_config_file = PathJoinSubstitution(

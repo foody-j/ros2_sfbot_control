@@ -142,9 +142,17 @@ std::vector<hardware_interface::StateInterface> SfBotSystemHardware::export_stat
 {
     std::vector<hardware_interface::StateInterface> state_interfaces;
     state_interfaces.emplace_back(hardware_interface::StateInterface(
-        "ak70-10-v1_1_continuous", hardware_interface::HW_IF_POSITION, &pos_[0]));
+        "joint_1", hardware_interface::HW_IF_POSITION, &pos_[0]));
     state_interfaces.emplace_back(hardware_interface::StateInterface(
-        "ak70-10-v1_2_continuous-9", hardware_interface::HW_IF_POSITION, &pos_[1]));
+        "joint_2", hardware_interface::HW_IF_POSITION, &pos_[1]));
+    state_interfaces.emplace_back(hardware_interface::StateInterface(
+        "joint_3", hardware_interface::HW_IF_POSITION, &pos_[2]));
+    state_interfaces.emplace_back(hardware_interface::StateInterface(
+        "joint_4", hardware_interface::HW_IF_POSITION, &pos_[3]));
+    state_interfaces.emplace_back(hardware_interface::StateInterface(
+        "joint_5", hardware_interface::HW_IF_POSITION, &pos_[4]));
+    state_interfaces.emplace_back(hardware_interface::StateInterface(
+        "joint_6", hardware_interface::HW_IF_POSITION, &pos_[5]));
     return state_interfaces;
 }
 
@@ -152,9 +160,17 @@ std::vector<hardware_interface::CommandInterface> SfBotSystemHardware::export_co
 {
     std::vector<hardware_interface::CommandInterface> command_interfaces;
     command_interfaces.emplace_back(hardware_interface::CommandInterface(
-        "ak70-10-v1_1_continuous", hardware_interface::HW_IF_POSITION, &cmd_[0]));
+        "joint_1", hardware_interface::HW_IF_POSITION, &cmd_[0]));
     command_interfaces.emplace_back(hardware_interface::CommandInterface(
-        "ak70-10-v1_2_continuous-9", hardware_interface::HW_IF_POSITION, &cmd_[1]));
+        "joint_2", hardware_interface::HW_IF_POSITION, &cmd_[1]));
+    command_interfaces.emplace_back(hardware_interface::CommandInterface(
+        "joint_3", hardware_interface::HW_IF_POSITION, &cmd_[2]));
+    command_interfaces.emplace_back(hardware_interface::CommandInterface(
+        "joint_4", hardware_interface::HW_IF_POSITION, &cmd_[3]));
+    command_interfaces.emplace_back(hardware_interface::CommandInterface(
+        "joint_5", hardware_interface::HW_IF_POSITION, &cmd_[4]));
+    command_interfaces.emplace_back(hardware_inte rface::CommandInterface(
+        "joint_6", hardware_interface::HW_IF_POSITION, &cmd_[5]));
     return command_interfaces;
 }
 
@@ -203,16 +219,38 @@ hardware_interface::CallbackReturn SfBotSystemHardware::on_activate(
     }
     
     if (can_driver.initialize_motor_origin(1)) {
-        RCLCPP_INFO(get_logger(), "Motor Origin initialization Successful");
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
-        can_driver.write_position_velocity(1, 0.0, velocity_, acceleration_);
-
+      RCLCPP_INFO(get_logger(), "Motor Origin initialization Successful");
+      std::this_thread::sleep_for(std::chrono::milliseconds(500));
+      can_driver.write_position_velocity(1, 0.0, velocity_, acceleration_);
     }
-    if (can_driver.initialize_motor_origin(2)) {
-    RCLCPP_INFO(get_logger(), "Motor Origin initialization Successful");
-    std::this_thread::sleep_for(std::chrono::milliseconds(500));
-    can_driver.write_position_velocity(2, 0.0, velocity_, acceleration_);
 
+    if (can_driver.initialize_motor_origin(2)) {
+      RCLCPP_INFO(get_logger(), "Motor Origin initialization Successful");
+      std::this_thread::sleep_for(std::chrono::milliseconds(500));
+      can_driver.write_position_velocity(2, 0.0, velocity_, acceleration_);
+    }
+
+    if (can_driver.initialize_motor_origin(3)) {
+      RCLCPP_INFO(get_logger(), "Motor Origin initialization Successful");
+      std::this_thread::sleep_for(std::chrono::milliseconds(500));
+      can_driver.write_position_velocity(3, 0.0, velocity_, acceleration_);
+    }
+
+    if (can_driver.initialize_motor_origin(4)) {
+      RCLCPP_INFO(get_logger(), "Motor Origin initialization Successful");
+      std::this_thread::sleep_for(std::chrono::milliseconds(500));
+      can_driver.write_position_velocity(4, 0.0, velocity_, acceleration_);
+    }
+
+    if (can_driver.initialize_motor_origin(5)) {
+      RCLCPP_INFO(get_logger(), "Motor Origin initialization Successful");
+      std::this_thread::sleep_for(std::chrono::milliseconds(500));
+      can_driver.write_position_velocity(5, 0.0, velocity_, acceleration_);
+    }
+    if (can_driver.initialize_motor_origin(6)) {
+      RCLCPP_INFO(get_logger(), "Motor Origin initialization Successful");
+      std::this_thread::sleep_for(std::chrono::milliseconds(500));
+      can_driver.write_position_velocity(6, 0.0, velocity_, acceleration_);
     }
     else {
         RCLCPP_ERROR(get_logger(), "Failed to initialize motor origin");
@@ -246,7 +284,7 @@ hardware_interface::return_type SfBotSystemHardware::read(
   {
     return hardware_interface::return_type::ERROR;
   }
-  for (uint8_t i = 1; i < 3; i++)  // 모터 1번과 2번의 데이터를 가져옴
+  for (uint8_t i = 1; i < 7; i++)  // 모터 1번과 2번의 데이터를 가져옴
   {
       motor_data = can_driver.getMotorData(i);
       pos_[i-1] = motor_data.position * M_PI / 180.0;  // degree를 radian으로 변환
@@ -254,7 +292,7 @@ hardware_interface::return_type SfBotSystemHardware::read(
       
       std::cout << std::dec;  // 10진수 모드로 명시적 설정
       std::cout << "Motor " << static_cast<int>(motor_data.motor_id) << ": "
-          << "Position: " << pos_[i-1] << "° "
+          << "Position: " << pos_[i-1] << "Radian "
           << "Speed: " << spd_[i-1] << " RPM "
           << "Current: " << motor_data.current << "A "
           << "Temperature: " << static_cast<int>(motor_data.temperature) << "°C "
@@ -294,6 +332,18 @@ hardware_interface::return_type SfBotSystemHardware::write(
 
       double degree2 = cmd_[1] * 180.0 / M_PI;  
       can_driver.write_position_velocity(2, degree2, velocity_, acceleration_);
+
+      double degree3 = cmd_[2] * 180.0 / M_PI;  
+      can_driver.write_position_velocity(3, degree3, velocity_, acceleration_);
+
+      double degree4 = cmd_[3] * 180.0 / M_PI;  
+      can_driver.write_position_velocity(4, degree4, velocity_, acceleration_);
+
+      double degree5 = cmd_[4] * 180.0 / M_PI;  
+      can_driver.write_position_velocity(5, degree5, velocity_, acceleration_);
+
+      double degree6 = cmd_[5] * 180.0 / M_PI;  
+      can_driver.write_position_velocity(6, degree6, velocity_, acceleration_);
   }
   catch (const std::exception& e) {
       RCLCPP_ERROR(rclcpp::get_logger("SfBotSystemHardware"), "Failed to write command: %s", e.what());
