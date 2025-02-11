@@ -169,7 +169,7 @@ std::vector<hardware_interface::CommandInterface> SfBotSystemHardware::export_co
         "joint_4", hardware_interface::HW_IF_POSITION, &cmd_[3]));
     command_interfaces.emplace_back(hardware_interface::CommandInterface(
         "joint_5", hardware_interface::HW_IF_POSITION, &cmd_[4]));
-    command_interfaces.emplace_back(hardware_inte rface::CommandInterface(
+    command_interfaces.emplace_back(hardware_interface::CommandInterface(
         "joint_6", hardware_interface::HW_IF_POSITION, &cmd_[5]));
     return command_interfaces;
 }
@@ -217,7 +217,7 @@ hardware_interface::CallbackReturn SfBotSystemHardware::on_activate(
         RCLCPP_ERROR(get_logger(), "Failed to connect to CAN bus");
         return hardware_interface::CallbackReturn::ERROR;
     }
-    
+    /*
     if (can_driver.initialize_motor_origin(1)) {
       RCLCPP_INFO(get_logger(), "Motor Origin initialization Successful");
       std::this_thread::sleep_for(std::chrono::milliseconds(500));
@@ -255,7 +255,7 @@ hardware_interface::CallbackReturn SfBotSystemHardware::on_activate(
     else {
         RCLCPP_ERROR(get_logger(), "Failed to initialize motor origin");
         return hardware_interface::CallbackReturn::ERROR;
-    }
+    }*/
     
     RCLCPP_INFO(get_logger(), "Successfully activated!");
     return hardware_interface::CallbackReturn::SUCCESS;

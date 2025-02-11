@@ -46,7 +46,7 @@ def generate_launch_description():
                 [
                     FindPackageShare("sfbot_can"),
                     "description/urdf",
-                    "test.urdf.xacro",
+                    "sfbot.urdf.xacro",
                 ]
             ),
         ]
