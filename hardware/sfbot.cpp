@@ -287,13 +287,13 @@ hardware_interface::return_type SfBotSystemHardware::read(
   for (uint8_t i = 1; i < 7; i++)  // 모터 1번과 2번의 데이터를 가져옴
   {
       motor_data = can_driver.getMotorData(i);
-      pos_[i-1] = motor_data.position;
-      // pos_[i-1] = motor_data.position * M_PI / 180.0;  // degree를 radian으로 변환
+      // pos_[i-1] = motor_data.position;
+      pos_[i-1] = motor_data.position * M_PI / 180.0;  // degree를 radian으로 변환
       spd_[i-1] = motor_data.speed;
       
       std::cout << std::dec;  // 10진수 모드로 명시적 설정
       std::cout << "Motor " << static_cast<int>(motor_data.motor_id) << ": "
-          << "Position: " << pos_[i-1] << " ° "
+          << "Position: " << pos_[i-1] << " 라디안 "
           << "Speed: " << spd_[i-1] << " RPM "
           << "Current: " << motor_data.current << "A "
           << "Temperature: " << static_cast<int>(motor_data.temperature) << "°C "
@@ -327,23 +327,23 @@ hardware_interface::return_type SfBotSystemHardware::write(
   }
   try {
     // radian to degree 변환 추가
-      double degree1 = cmd_[0];  // cmd_[0]는 radian 값을 degree로 변환
+      double degree1 = cmd_[0] * 180.0 / M_PI;  // cmd_[0]는 radian 값을 degree로 변환
       // position-velocity 모드로 명령 전송
       can_driver.write_position_velocity(1, degree1, velocity_, acceleration_);
 
-      double degree2 = cmd_[1];  
+      double degree2 = cmd_[1] * 180.0 / M_PI;
       can_driver.write_position_velocity(2, degree2, velocity_, acceleration_);
 
-      double degree3 = cmd_[2];  
+      double degree3 = cmd_[2] * 180.0 / M_PI;
       can_driver.write_position_velocity(3, degree3, velocity_, acceleration_);
 
-      double degree4 = cmd_[3];  
+      double degree4 = cmd_[3] * 180.0 / M_PI;
       can_driver.write_position_velocity(4, degree4, velocity_, acceleration_);
 
-      double degree5 = cmd_[4];  
+      double degree5 = cmd_[4] * 180.0 / M_PI;
       can_driver.write_position_velocity(5, degree5, velocity_, acceleration_);
 
-      double degree6 = cmd_[5];  
+      double degree6 = cmd_[5] * 180.0 / M_PI;
       can_driver.write_position_velocity(6, degree6, velocity_, acceleration_);
   }
   catch (const std::exception& e) {
