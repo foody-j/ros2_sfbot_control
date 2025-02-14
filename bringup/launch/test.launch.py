@@ -85,7 +85,14 @@ def generate_launch_description():
         arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
         output="screen",
     )
-
+    # 기존 joint_trajectory_controller 제거하고 forward_position_controller 추가
+    forward_position_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["forward_position_controller", "--controller-manager", "/controller_manager"],
+        output="screen",
+    )
+    
     # Joint Trajectory Controller
     joint_trajectory_controller_spawner = Node(
         package="controller_manager",
@@ -97,7 +104,7 @@ def generate_launch_description():
     delay_trajectory_controller = RegisterEventHandler(
         event_handler=OnProcessExit(
             target_action=joint_state_broadcaster_spawner,
-            on_exit=[joint_trajectory_controller_spawner],
+            on_exit=[forward_position_controller_spawner],
         )
     )
 
