@@ -60,6 +60,11 @@ def generate_launch_description():
             "test_controllers.yaml",
         ]
     )
+    # RViz
+    rviz_config_file = PathJoinSubstitution(
+        [FindPackageShare("sfbot_can"), "rviz", "my_robot.rviz"]
+    )
+
     # rviz_config_file = PathJoinSubstitution(
     #  [FindPackageShare("ros2_control_demo_description"), "rrbot/rviz", "rrbot.rviz"]
     # )
@@ -100,11 +105,21 @@ def generate_launch_description():
         arguments=["joint_trajectory_controller", "--controller-manager", "/controller_manager"],
         output="screen",
     )
+    rviz_node = Node(
+        package="rviz2",
+        executable="rviz2",
+        name="rviz2",
+        output="screen",
+        arguments=["-d", rviz_config_file],
+        #parameters=[robot_description],  # robot_description 파라미터 추가
+        condition=IfCondition(gui)
+    )
+
     # 실행 순서 제어
     delay_trajectory_controller = RegisterEventHandler(
         event_handler=OnProcessExit(
             target_action=joint_state_broadcaster_spawner,
-            on_exit=[forward_position_controller_spawner],
+            on_exit=[joint_trajectory_controller_spawner],
         )
     )
 
@@ -113,6 +128,7 @@ def generate_launch_description():
         robot_state_pub_node,
         joint_state_broadcaster_spawner,
         delay_trajectory_controller,
+        rviz_node,
 
     ]
 

@@ -16,7 +16,7 @@
 #include "sfbot_can/sfbot.hpp"
 
 // CAN 통신 드라이버 헤더 추가
-#include "sfbot_can/motor_can_driver.hpp" //CAN 통신 클래스 정의된 헤더
+#include "sfbot_can/motor_can_driver_multiple.hpp" //CAN 통신 클래스 정의된 헤더
 #include "sfbot_can/motor_data.hpp" // 모터 데이터 객체 정의 헤더
 
 // 필요한 표준 라이브러리 헤더들 포함
@@ -182,7 +182,7 @@ hardware_interface::CallbackReturn SfBotSystemHardware::on_configure(
   {
     can_driver.disconnect();
   }
-  can_driver.connect("can0", 1000000);
+  can_driver.connect();
   RCLCPP_INFO(rclcpp::get_logger("DiffDriveArduinoHardware"), "Successfully configured!");
 
   return hardware_interface::CallbackReturn::SUCCESS;
@@ -209,7 +209,7 @@ hardware_interface::CallbackReturn SfBotSystemHardware::on_activate(
     acceleration_ = 1000.0f;  // RPM/s    
 
     if (!can_driver.connected()) {
-        can_driver.connect("can0", 1000000);
+        can_driver.connect();
     }
     
     // 원점 설정 전에 연결 확인

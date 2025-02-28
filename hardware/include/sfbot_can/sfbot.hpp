@@ -27,7 +27,7 @@
 #include "rclcpp/macros.hpp"  // ROS 2 C++ 매크로 정의
 #include "rclcpp_lifecycle/node_interfaces/lifecycle_node_interface.hpp"  // 생명 주기 노드 정의
 #include "rclcpp_lifecycle/state.hpp" // 생명 주기 상태 정의
-#include "motor_can_driver.hpp"
+#include "motor_can_driver_multiple.hpp"
 #include "motor_data.hpp"
 
 

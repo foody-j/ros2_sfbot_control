@@ -72,6 +72,11 @@ install(TARGETS sfbot_can
   RUNTIME DESTINATION bin
 )
 
+install(
+  DIRECTORY rviz
+  DESTINATION share/sfbot_can
+)
+
 if(BUILD_TESTING)
   find_package(ament_cmake_pytest REQUIRED)
 
