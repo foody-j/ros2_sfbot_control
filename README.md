@@ -1,6 +1,6 @@
 # sfbot_can
 
-   ros2_control 프레임워크를 이용하여 SFBot 개발을 위한 연습 과정입니다. 2자유도를 가진 모터를 제어합니다.  
+   ros2_control 프레임워크를 이용하여 SFBot 개발 프로젝트입니다. 다중 모터를 CAN 통신 인터페이스로 제어합니다.
 
    개발자 : foody-j  
 
