@@ -1,18 +1,51 @@
-# sfbot_can
+# ROS2 Robot Control System - `sfbot_can`
 
-   ros2_control 프레임워크를 이용하여 SFBot 개발 프로젝트입니다. 다중 모터를 CAN 통신 인터페이스로 제어합니다.
+This repository contains the ROS2 control implementation for a robotic system that communicates with motors via a CAN bus.
 
-   개발자 : foody-j  
+The package is designed to work with multi-joint robots and includes various controllers, hardware interfaces, and execution configurations.
 
+---
 
-Hardware Interface Class : SfBotSystemHardware  
-namespace : sfbot_can   
+## Overview
 
-CAN Communication driver header : motor_can_driver.hpp  
-Motor Data Structure header : motor_data.hpp  
+The `sfbot_can` package provides a complete framework for controlling motors connected via a CAN bus using `ros2_control`. It includes the following features:
 
-# 변경사항
-   2025.01.21  
-   motor_data.hpp 파일 수정  
-      MotorData 구조체에 motor_id 추가  
-      편의 함수 추가
+- Implementation of hardware interfaces for CAN communication (single and multi-CAN bus)
+- Motor data processing and management
+
+---
+
+## Key Components
+
+### Hardware Components
+- **Motor CAN Driver**: Implements single and multi-CAN interface communication
+- **Hardware Interface**: ROS2 hardware interface implementation for the robot
+
+### Controllers
+- **Joint Trajectory Controller**: For smooth trajectory execution
+- **Forward Position Controller**: For direct position commands
+- **Joint State Broadcaster**: For publishing joint states
+
+---
+
+## Executables
+
+- **`test.launch.py`**: Launch file for testing the system
+
+---
+
+## Hardware Support
+
+This system supports CAN-based motors with the following features:
+
+- Position control
+- Velocity control
+- Combined position-velocity control
+- Homing (origin initialization)
+- Multi-CAN bus management
+
+---
+
+## License
+
+This package is distributed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
