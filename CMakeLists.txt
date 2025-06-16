@@ -35,7 +35,7 @@ endforeach()
 add_library(
   sfbot_can
   SHARED
-  hardware/sfbot.cpp
+  hardware/sfbot.my_robot.cpp
 )
 target_compile_features(sfbot_can PUBLIC cxx_std_17)
 target_include_directories(sfbot_can PUBLIC
