@@ -61,6 +61,11 @@ install(
   DESTINATION share/sfbot_can
 )
 
+# STL 파일들 설치
+install(DIRECTORY description/urdf/meshes/
+  DESTINATION share/${PROJECT_NAME}/description/urdf/meshes/
+)
+
 install(
   DIRECTORY bringup/launch bringup/config
   DESTINATION share/sfbot_can

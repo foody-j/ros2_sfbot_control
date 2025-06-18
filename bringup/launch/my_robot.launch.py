@@ -21,6 +21,7 @@ from launch.substitutions import Command, FindExecutable, LaunchConfiguration, P
 
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
+from launch_ros.parameter_descriptions import ParameterValue  # 추가
 
 
 def generate_launch_description():
@@ -38,18 +39,21 @@ def generate_launch_description():
     gui = LaunchConfiguration("gui")
 
     # Get URDF via xacro
-    robot_description_content = Command(
-        [
-            PathJoinSubstitution([FindExecutable(name="xacro")]),
-            " ",
-            PathJoinSubstitution(
-                [
-                    FindPackageShare("sfbot_can"),
-                    "description/urdf",
-                    "my_robot.urdf.xacro",
-                ]
-            ),
-        ]
+    robot_description_content = ParameterValue(  # ParameterValue로 래핑
+        Command(
+            [
+                PathJoinSubstitution([FindExecutable(name="xacro")]),
+                " ",
+                PathJoinSubstitution(
+                    [
+                        FindPackageShare("sfbot_can"),
+                        "description/urdf",
+                        "my_robot.urdf.xacro",
+                    ]
+                ),
+            ]
+        ),
+        value_type=str  # 문자열로 명시
     )
     robot_description = {"robot_description": robot_description_content}
 
@@ -65,14 +69,11 @@ def generate_launch_description():
         [FindPackageShare("sfbot_can"), "rviz", "my_robot.rviz"]
     )
 
-    # rviz_config_file = PathJoinSubstitution(
-    #  [FindPackageShare("ros2_control_demo_description"), "rrbot/rviz", "rrbot.rviz"]
-    # )
-# 노드 정의
+    # 노드 정의
     control_node = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        parameters=[robot_controllers],
+        parameters=[robot_controllers, robot_description],  # robot_description 추가
         output="screen",
     )
 
@@ -90,7 +91,8 @@ def generate_launch_description():
         arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
         output="screen",
     )
-    # 기존 joint_trajectory_controller 제거하고 forward_position_controller 추가
+    
+    # Forward Position Controller
     forward_position_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -105,20 +107,27 @@ def generate_launch_description():
         arguments=["joint_trajectory_controller", "--controller-manager", "/controller_manager"],
         output="screen",
     )
+    
     rviz_node = Node(
         package="rviz2",
         executable="rviz2",
         name="rviz2",
         output="screen",
         arguments=["-d", rviz_config_file],
-        #parameters=[robot_description],  # robot_description 파라미터 추가
         condition=IfCondition(gui)
     )
 
     # 실행 순서 제어
-    delay_trajectory_controller = RegisterEventHandler(
+    delay_forward_position_controller = RegisterEventHandler(
         event_handler=OnProcessExit(
             target_action=joint_state_broadcaster_spawner,
+            on_exit=[forward_position_controller_spawner],
+        )
+    )
+    
+    delay_trajectory_controller = RegisterEventHandler(
+        event_handler=OnProcessExit(
+            target_action=forward_position_controller_spawner,
             on_exit=[joint_trajectory_controller_spawner],
         )
     )
@@ -127,9 +136,9 @@ def generate_launch_description():
         control_node,
         robot_state_pub_node,
         joint_state_broadcaster_spawner,
+        delay_forward_position_controller,  # 추가
         delay_trajectory_controller,
         rviz_node,
-
     ]
 
     return LaunchDescription(declared_arguments + nodes)
