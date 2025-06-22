@@ -92,19 +92,27 @@ def generate_launch_description():
         output="screen",
     )
     
-    # Forward Position Controller
+    # Forward Position Controller - INACTIVE로 시작
     forward_position_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["forward_position_controller", "--controller-manager", "/controller_manager"],
+        arguments=[
+            "forward_position_controller", 
+            "--controller-manager", "/controller_manager",
+            "--inactive"  # 비활성 상태로 시작
+        ],
         output="screen",
     )
     
-    # Joint Trajectory Controller
+    # Joint Trajectory Controller - ACTIVE로 시작 (기본값)
     joint_trajectory_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["joint_trajectory_controller", "--controller-manager", "/controller_manager"],
+        arguments=[
+            "joint_trajectory_controller", 
+            "--controller-manager", "/controller_manager"
+            # --inactive 플래그를 제거하여 활성 상태로 시작
+        ],
         output="screen",
     )
     
@@ -117,18 +125,18 @@ def generate_launch_description():
         condition=IfCondition(gui)
     )
 
-    # 실행 순서 제어
+    # 실행 순서 제어 - joint_trajectory_controller를 우선적으로 활성화
     delay_forward_position_controller = RegisterEventHandler(
         event_handler=OnProcessExit(
             target_action=joint_state_broadcaster_spawner,
-            on_exit=[forward_position_controller_spawner],
+            on_exit=[joint_trajectory_controller_spawner],  # trajectory controller를 먼저 시작
         )
     )
     
-    delay_trajectory_controller = RegisterEventHandler(
+    delay_forward_controller = RegisterEventHandler(
         event_handler=OnProcessExit(
-            target_action=forward_position_controller_spawner,
-            on_exit=[joint_trajectory_controller_spawner],
+            target_action=joint_trajectory_controller_spawner,
+            on_exit=[forward_position_controller_spawner],  # 그 다음에 forward controller (inactive)
         )
     )
 
@@ -136,8 +144,8 @@ def generate_launch_description():
         control_node,
         robot_state_pub_node,
         joint_state_broadcaster_spawner,
-        delay_forward_position_controller,  # 추가
-        delay_trajectory_controller,
+        delay_forward_position_controller,  
+        delay_forward_controller,  # 수정된 이름
         rviz_node,
     ]
 
