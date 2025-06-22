@@ -188,7 +188,7 @@ public:
         motor_commands_[driver_id - 1].acceleration = acceleration;
         motor_commands_[driver_id - 1].active = true;
         motor_commands_[driver_id - 1].command_type = CommandType::POSITION_VELOCITY;
-        motor_commands_[driver_id - 1].last_sent = std::chrono::steady_clock::now();
+        motor_commands_[driver_id - 1].last_sent = std::chrono::steady_clock::now() - std::chrono::milliseconds(20);  // 과거 시간으로 설정
     }
 
     // 모터 데이터 조회
@@ -524,23 +524,33 @@ private:
             
             // 각 모터의 활성 명령 처리
             for (size_t i = 0; i < motor_commands_.size(); i++) {
-                std::lock_guard<std::mutex> lock(command_mutex_);
-                auto& cmd = motor_commands_[i];
+                MotorCommand cmd_copy;
+                {
+                    std::lock_guard<std::mutex> lock(command_mutex_);
+                    cmd_copy = motor_commands_[i];  // 복사해서 빠르게 락 해제
+                }
                 
-                if (cmd.active) {
+                if (cmd_copy.active) {
+                    std::cout << "*** COMMAND_LOOP: Motor " << static_cast<int>(cmd_copy.motor_id) 
+                             << " active, type=" << static_cast<int>(cmd_copy.command_type) 
+                             << ", pos=" << cmd_copy.position << std::endl;
+                    
                     // 마지막 전송 후 UPDATE_INTERVAL이 지났는지 확인
-                    if (current_time - cmd.last_sent >= UPDATE_INTERVAL) {
-                        // 해당 모터가 매핑된 CAN 인터페이스 찾기
-                        int can_idx = get_can_index_for_motor(cmd.motor_id);
+                    if (current_time - cmd_copy.last_sent >= UPDATE_INTERVAL) {
+                        std::cout << "*** COMMAND_LOOP: Sending CAN frame for motor " 
+                                 << static_cast<int>(cmd_copy.motor_id) << std::endl;
                         
-                        // 명령 타입에 따라 CAN 프레임 생성 (미리 생성)
+                        // 해당 모터가 매핑된 CAN 인터페이스 찾기
+                        int can_idx = get_can_index_for_motor(cmd_copy.motor_id);
+                        
+                        // 명령 타입에 따라 CAN 프레임 생성
                         struct can_frame frame{};
                         
-                        if (cmd.command_type == CommandType::VELOCITY) {
+                        if (cmd_copy.command_type == CommandType::VELOCITY) {
                             uint32_t control_mode = 3;  // Velocity Mode
-                            uint32_t id = (control_mode << 8) | cmd.motor_id;
+                            uint32_t id = (control_mode << 8) | cmd_copy.motor_id;
                             
-                            int32_t speed = static_cast<int32_t>(cmd.value);
+                            int32_t speed = static_cast<int32_t>(cmd_copy.value);
                             
                             frame.can_id = id | CAN_EFF_FLAG;
                             frame.can_dlc = 4;
@@ -549,13 +559,13 @@ private:
                             frame.data[2] = (speed >> 8) & 0xFF;
                             frame.data[3] = speed & 0xFF;
                             
-                        } else if (cmd.command_type == CommandType::POSITION_VELOCITY) {
+                        } else if (cmd_copy.command_type == CommandType::POSITION_VELOCITY) {
                             uint32_t control_mode = 6;  // Position-Velocity Mode
-                            uint32_t id = (control_mode << 8) | cmd.motor_id;
+                            uint32_t id = (control_mode << 8) | cmd_copy.motor_id;
                             
-                            int32_t pos = static_cast<int32_t>(cmd.position * 10000.0f);
-                            int16_t speed = static_cast<int16_t>(cmd.velocity);
-                            int16_t acc = static_cast<int16_t>(cmd.acceleration / 10.0f);
+                            int32_t pos = static_cast<int32_t>(cmd_copy.position * 10000.0f);
+                            int16_t speed = static_cast<int16_t>(cmd_copy.velocity);
+                            int16_t acc = static_cast<int16_t>(cmd_copy.acceleration / 10.0f);
                             
                             frame.can_id = id | CAN_EFF_FLAG;
                             frame.can_dlc = 8;
@@ -568,13 +578,13 @@ private:
                             frame.data[6] = (acc >> 8) & 0xFF;
                             frame.data[7] = acc & 0xFF;
                             
-                        } else if (cmd.command_type == CommandType::SET_ORIGIN) {
+                        } else if (cmd_copy.command_type == CommandType::SET_ORIGIN) {
                             uint32_t control_mode = 5;  // Set Origin Mode
-                            uint32_t id = (control_mode <<8) | cmd.motor_id;
+                            uint32_t id = (control_mode << 8) | cmd_copy.motor_id;
                             
                             frame.can_id = id | CAN_EFF_FLAG;
                             frame.can_dlc = 1;
-                            frame.data[0] = cmd.is_permanent ? 1 : 0;
+                            frame.data[0] = cmd_copy.is_permanent ? 1 : 0;
                         }
                         
                         // 매핑된 인터페이스가 있으면 해당 인터페이스로만 전송
@@ -582,25 +592,37 @@ private:
                             can_interfaces_[can_idx].is_connected) {
                             
                             // CAN 메시지 전송
-                            write(can_interfaces_[can_idx].socket_fd, &frame, sizeof(struct can_frame));
-                            cmd.try_all_interfaces = false; // 매핑된 후에는 더 이상 모든 인터페이스로 전송하지 않음
+                            ssize_t result = write(can_interfaces_[can_idx].socket_fd, &frame, sizeof(struct can_frame));
+                            std::cout << "*** CAN write result: " << result << " bytes" << std::endl;
                         }
                         // 매핑되지 않았으면 모든 연결된 인터페이스로 전송
-                        else if (cmd.try_all_interfaces) {
+                        else if (cmd_copy.try_all_interfaces) {
+                            std::cout << "*** Sending to all interfaces (not mapped yet)" << std::endl;
                             for (int j = 0; j < MAX_CAN_INTERFACES; j++) {
                                 if (can_interfaces_[j].is_connected) {
                                     // CAN 메시지 전송
-                                    write(can_interfaces_[j].socket_fd, &frame, sizeof(struct can_frame));
+                                    ssize_t result = write(can_interfaces_[j].socket_fd, &frame, sizeof(struct can_frame));
+                                    std::cout << "*** CAN write to " << can_interfaces_[j].name 
+                                             << " result: " << result << " bytes" << std::endl;
                                 }
                             }
                         }
                         
-                        cmd.last_sent = current_time;
+                        // last_sent 업데이트
+                        {
+                            std::lock_guard<std::mutex> lock(command_mutex_);
+                            motor_commands_[i].last_sent = current_time;
+                        }
+                    } else {
+                        auto time_left = std::chrono::duration_cast<std::chrono::milliseconds>
+                                       (UPDATE_INTERVAL - (current_time - cmd_copy.last_sent));
+                        std::cout << "*** COMMAND_LOOP: Waiting " << time_left.count() 
+                                 << "ms for motor " << static_cast<int>(cmd_copy.motor_id) << std::endl;
                     }
                 }
             }
             
-            std::this_thread::sleep_for(std::chrono::milliseconds(1));
+            std::this_thread::sleep_for(std::chrono::milliseconds(5));
         }
     }
 };
