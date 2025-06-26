@@ -1,0 +1,171 @@
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found controller_manager: 4.27.0 (/opt/ros/jazzy/share/controller_manager/cmake)
+-- Found Python3: /home/yj/ros2_venv/bin/python3 (found version "3.12.3") found components: Interpreter 
+-- Found rosidl_generator_c: 4.6.5 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+-- Found rosidl_generator_cpp: 4.6.5 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 7.3.1 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 8.4.1 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.13")  
+-- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") 
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found ament_cmake_pytest: 2.5.3 (/opt/ros/jazzy/share/ament_cmake_pytest/cmake)
+-- Configuring done (2.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/yj/ros2_ws/src/sfbot_can/build/sfbot_can
+[ 50%] [32mBuilding CXX object CMakeFiles/sfbot_can.dir/hardware/sfbot.my_robot.cpp.o[0m
+[100%] [32m[1mLinking CXX shared library libsfbot_can.so[0m
+[100%] Built target sfbot_can
+-- Install configuration: ""
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/sfbot_can.xml
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/include/sfbot_can
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/include/sfbot_can/sfbot_can
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/include/sfbot_can/sfbot_can/cubemars_motors.hpp
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/include/sfbot_can/sfbot_can/motor_can_driver_multiple.hpp
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/include/sfbot_can/sfbot_can/can_csv_logger.hpp
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/include/sfbot_can/sfbot_can/rrbot.hpp
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/include/sfbot_can/sfbot_can/motor_can_driver.hpp
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/include/sfbot_can/sfbot_can/motor_data.hpp
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/include/sfbot_can/sfbot_can/sfbot.hpp
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/my_robot.urdf.xacro
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/sfbot.urdf.xacro
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/my_robot.description.urdf.xacro
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/test.urdf.xacro
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/Component8_1.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/mesh_link5_1.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/Component7.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/base_link.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/mesh_link3_motor.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/mesh_link4_1.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/mesh_link4_PLA.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/mesh_link6_motor.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/mesh_link5_2.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/mesh_link5_motor.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/mesh_link3_1.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/mesh_link2_PLA.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/mesh_link1_motor.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/mesh_link1_2.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/mesh_link2_7.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/mesh_link4_7.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/ak70-2-v1.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/Component6.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/Component9.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/Component8_2.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/Component11.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/Component10.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/mesh_link1_1.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/mesh_link6_1.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/Component3.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/mesh_link3_2.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/ak60-1-v1.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/mesh_link2_motor.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/Component4.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/ak70-1-v1.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/mesh_link4_motor.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/Component5.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/mesh_link2_1.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/Component2.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/mesh_base_link.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/sfbot.description.urdf.xacro
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/test.description.urdf.xacro
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/sfbot.description.urdf_collision.xacro
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/ros2_control
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/ros2_control/ros2_control.xacro
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/ros2_control/ros2_control_my_robot.xacro
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/ros2_control/ros2_control_test.xacro
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/launch
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/launch/view_robot.launch.py
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes/
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//Component8_1.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//mesh_link5_1.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//Component7.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//base_link.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//mesh_link3_motor.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//mesh_link4_1.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//mesh_link4_PLA.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//mesh_link6_motor.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//mesh_link5_2.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//mesh_link5_motor.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//mesh_link3_1.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//mesh_link2_PLA.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//mesh_link1_motor.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//mesh_link1_2.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//mesh_link2_7.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//mesh_link4_7.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//ak70-2-v1.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//Component6.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//Component9.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//Component8_2.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//Component11.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//Component10.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//mesh_link1_1.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//mesh_link6_1.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//Component3.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//mesh_link3_2.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//ak60-1-v1.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//mesh_link2_motor.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//Component4.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//ak70-1-v1.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//mesh_link4_motor.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//Component5.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//mesh_link2_1.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//Component2.stl
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/description/urdf/meshes//mesh_base_link.stl
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/launch
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/launch/cartesian_controller.launch.py
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/launch/test_forward_position_controller.launch.py
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/launch/rrbot.launch.py
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/launch/rrbot.launch_old.py
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/launch/test_joint_trajectory_controller.launch.py
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/launch/my_robot.launch.py
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/launch/test.launch.py
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/config
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/config/my_robot_controllers.yaml
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/config/rrbot_jtc.yaml
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/config/rrbot_controllers.yaml
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/config/rrbot_forward_position_publisher.yaml
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/config/rrbot_joint_trajectory_publisher.yaml
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/config/controller_config.yaml
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/config/test_controllers.yaml
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/config/rrbot_controllers_old.yaml
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/lib/sfbot_can/advanced_cartesian_controller.py
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/lib/sfbot_can/advanced_cartesian_controller.py
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/lib/sfbot_can/simple_action_test.py
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/lib/sfbot_can/advanced_cartesian_controller.py
+-- Up-to-date: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/lib/sfbot_can/simple_action_test.py
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/lib/sfbot_can/direct_command_test.py
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/lib/libsfbot_can.so
+-- Set non-toolchain portion of runtime path of "/home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/lib/libsfbot_can.so" to ""
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/rviz
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/rviz/my_robot.rviz
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/environment/library_path.sh
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/environment/library_path.dsv
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/ament_index/resource_index/package_run_dependencies/sfbot_can
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/ament_index/resource_index/parent_prefix_path/sfbot_can
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/environment/ament_prefix_path.sh
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/environment/ament_prefix_path.dsv
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/environment/path.sh
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/environment/path.dsv
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/local_setup.bash
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/local_setup.sh
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/local_setup.zsh
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/local_setup.dsv
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/package.dsv
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/ament_index/resource_index/packages/sfbot_can
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/ament_index/resource_index/hardware_interface__pluginlib__plugin/sfbot_can
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/cmake/export_sfbot_controlExport.cmake
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/cmake/export_sfbot_controlExport-noconfig.cmake
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/cmake/ament_cmake_export_targets-extras.cmake
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/cmake/sfbot_canConfig.cmake
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/cmake/sfbot_canConfig-version.cmake
+-- Installing: /home/yj/ros2_ws/src/sfbot_can/install/sfbot_can/share/sfbot_can/package.xml

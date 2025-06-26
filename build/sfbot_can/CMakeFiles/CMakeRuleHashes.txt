@@ -1,0 +1,2 @@
+# Hashes of file build rules.
+36a316cce6eccb21d2285ef0f4d57193 CMakeFiles/sfbot_can_uninstall

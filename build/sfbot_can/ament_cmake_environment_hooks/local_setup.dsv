@@ -1,0 +1,3 @@
+source;share/sfbot_can/environment/ament_prefix_path.sh
+source;share/sfbot_can/environment/library_path.sh
+source;share/sfbot_can/environment/path.sh

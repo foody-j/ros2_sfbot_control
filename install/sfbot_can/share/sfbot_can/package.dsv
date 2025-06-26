@@ -1,0 +1,11 @@
+source;share/sfbot_can/hook/cmake_prefix_path.ps1
+source;share/sfbot_can/hook/cmake_prefix_path.dsv
+source;share/sfbot_can/hook/cmake_prefix_path.sh
+source;share/sfbot_can/hook/ld_library_path_lib.ps1
+source;share/sfbot_can/hook/ld_library_path_lib.dsv
+source;share/sfbot_can/hook/ld_library_path_lib.sh
+source;share/sfbot_can/local_setup.bash
+source;share/sfbot_can/local_setup.dsv
+source;share/sfbot_can/local_setup.ps1
+source;share/sfbot_can/local_setup.sh
+source;share/sfbot_can/local_setup.zsh

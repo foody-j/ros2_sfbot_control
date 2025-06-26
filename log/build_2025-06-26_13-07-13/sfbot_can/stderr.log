@@ -1,0 +1,43 @@
+[33mCMake Warning at /opt/ros/jazzy/share/ament_cmake_pytest/cmake/ament_add_pytest_test.cmake:82 (message):
+  The Python module 'pytest' was not found, pytests cannot be run.  On Linux,
+  install the 'python3-pytest' package.  On other platforms, install 'pytest'
+  using pip.
+Call Stack (most recent call first):
+  CMakeLists.txt:107 (ament_add_pytest_test)
+
+[0m
+[33mCMake Warning at /opt/ros/jazzy/share/ament_cmake_pytest/cmake/ament_add_pytest_test.cmake:82 (message):
+  The Python module 'pytest' was not found, pytests cannot be run.  On Linux,
+  install the 'python3-pytest' package.  On other platforms, install 'pytest'
+  using pip.
+Call Stack (most recent call first):
+  CMakeLists.txt:108 (ament_add_pytest_test)
+
+[0m
+[33mCMake Warning at /opt/ros/jazzy/share/ament_cmake_pytest/cmake/ament_add_pytest_test.cmake:82 (message):
+  The Python module 'pytest' was not found, pytests cannot be run.  On Linux,
+  install the 'python3-pytest' package.  On other platforms, install 'pytest'
+  using pip.
+Call Stack (most recent call first):
+  CMakeLists.txt:109 (ament_add_pytest_test)
+
+[0m
+[33mCMake Warning at /opt/ros/jazzy/share/ament_cmake_pytest/cmake/ament_add_pytest_test.cmake:82 (message):
+  The Python module 'pytest' was not found, pytests cannot be run.  On Linux,
+  install the 'python3-pytest' package.  On other platforms, install 'pytest'
+  using pip.
+Call Stack (most recent call first):
+  CMakeLists.txt:110 (ament_add_pytest_test)
+
+[0m
+In file included from [01m[K/home/yj/ros2_ws/src/sfbot_can/hardware/include/sfbot_can/motor_can_driver_multiple.hpp:29[m[K,
+                 from [01m[K/home/yj/ros2_ws/src/sfbot_can/hardware/include/sfbot_can/sfbot.hpp:30[m[K,
+                 from [01m[K/home/yj/ros2_ws/src/sfbot_can/hardware/sfbot.my_robot.cpp:16[m[K:
+[01m[K/home/yj/ros2_ws/src/sfbot_can/hardware/include/sfbot_can/cubemars_motors.hpp:[m[K In function ‘[01m[Kint16_t CubeMars::Protocol::[01;32m[Kvelocity_to_protocol_int16[m[K(float)[m[K’:
+[01m[K/home/yj/ros2_ws/src/sfbot_can/hardware/include/sfbot_can/cubemars_motors.hpp:66:24:[m[K [01;35m[Kwarning: [m[Kcomparison is always false due to limited range of data type [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wtype-limits-Wtype-limits]8;;[m[K]
+   66 |             if ([01;35m[Kresult > 32767[m[K) result = 32767;
+      |                 [01;35m[K~~~~~~~^~~~~~~[m[K
+[01m[K/home/yj/ros2_ws/src/sfbot_can/hardware/include/sfbot_can/cubemars_motors.hpp:[m[K In function ‘[01m[Kint16_t CubeMars::Protocol::[01;32m[Kacceleration_to_protocol[m[K(float)[m[K’:
+[01m[K/home/yj/ros2_ws/src/sfbot_can/hardware/include/sfbot_can/cubemars_motors.hpp:75:24:[m[K [01;35m[Kwarning: [m[Kcomparison is always false due to limited range of data type [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wtype-limits-Wtype-limits]8;;[m[K]
+   75 |             if ([01;35m[Kresult > 32767[m[K) result = 32767;
+      |                 [01;35m[K~~~~~~~^~~~~~~[m[K

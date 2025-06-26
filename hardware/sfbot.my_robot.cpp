@@ -206,8 +206,8 @@ hardware_interface::CallbackReturn SfBotSystemHardware::on_activate(
   const rclcpp_lifecycle::State & /*previous_state*/) {
     RCLCPP_INFO(get_logger(), "Activating ...please wait...");
     // 여기에 속도와 가속도 초기화 추가
-    velocity_ = 1000.0f;  // RPM
-    acceleration_ = 1000.0f;  // RPM/s    
+    velocity_ = 20.0f;  // RPM
+    acceleration_ = 20.0f;  // RPM/s    
 
     if (!can_driver.connected()) {
         can_driver.connect();
