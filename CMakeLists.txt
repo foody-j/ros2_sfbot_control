@@ -86,6 +86,11 @@ install(
   scripts/advanced_cartesian_controller.py
   scripts/simple_action_test.py 
   scripts/direct_command_test.py # <<< 이 줄을 추가
+  scripts/rectangle_visualization.py
+  scripts/tf_based_visualizer.py
+  scripts/waypoint_verification_controller.py
+  scripts/hi.py
+
   DESTINATION lib/${PROJECT_NAME}
 )
 

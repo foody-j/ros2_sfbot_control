@@ -206,8 +206,8 @@ hardware_interface::CallbackReturn SfBotSystemHardware::on_activate(
   const rclcpp_lifecycle::State & /*previous_state*/) {
     RCLCPP_INFO(get_logger(), "Activating ...please wait...");
     // 여기에 속도와 가속도 초기화 추가
-    velocity_ = 20.0f;  // RPM
-    acceleration_ = 20.0f;  // RPM/s    
+    velocity_ = 5.0f;  // RPM
+    acceleration_ = 10.0f;  // RPM/s    
 
     if (!can_driver.connected()) {
         can_driver.connect();
@@ -313,35 +313,45 @@ hardware_interface::return_type SfBotSystemHardware::write(
   if (!can_driver.connected()) {
     return hardware_interface::return_type::ERROR;
   }
+  
   try {
-    // radian to degree 변환 추가
-      double degree1 = cmd_[0] * 180.0 / M_PI;  // cmd_[0]는 radian 값을 degree로 변환
-      // position-velocity 모드로 명령 전송
-      can_driver.write_position_velocity(1, degree1, velocity_, acceleration_);
+    // ⭐ 동적으로 속도 제한 (급격한 변화 방지)
+    const float MAX_VELOCITY = 3.0f;    // 최대 3 RPM으로 제한
+    const float MAX_ACCELERATION = 5.0f; // 최대 5 RPM/s로 제한
+    
+    float limited_velocity = std::min(velocity_, MAX_VELOCITY);
+    float limited_acceleration = std::min(acceleration_, MAX_ACCELERATION);
+    
+    // radian to degree 변환
+    double degree1 = cmd_[0] * 180.0 / M_PI;
+    can_driver.write_position_velocity(1, degree1, limited_velocity, limited_acceleration);
 
-      double degree2 = cmd_[1] * 180.0 / M_PI;
-      can_driver.write_position_velocity(2, degree2, velocity_, acceleration_);
+    double degree2 = cmd_[1] * 180.0 / M_PI;
+    can_driver.write_position_velocity(2, degree2, limited_velocity, limited_acceleration);
 
-      double degree3 = cmd_[2] * 180.0 / M_PI;
-      can_driver.write_position_velocity(3, degree3, velocity_, acceleration_);
+    double degree3 = cmd_[2] * 180.0 / M_PI;
+    can_driver.write_position_velocity(3, degree3, limited_velocity, limited_acceleration);
 
-      double degree4 = cmd_[3] * 180.0 / M_PI;
-      can_driver.write_position_velocity(4, degree4, velocity_, acceleration_);
+    double degree4 = cmd_[3] * 180.0 / M_PI;
+    can_driver.write_position_velocity(4, degree4, limited_velocity, limited_acceleration);
 
-      double degree5 = cmd_[4] * 180.0 / M_PI;
-      can_driver.write_position_velocity(5, degree5, velocity_, acceleration_);
+    double degree5 = cmd_[4] * 180.0 / M_PI;
+    can_driver.write_position_velocity(5, degree5, limited_velocity, limited_acceleration);
 
-      double degree6 = cmd_[5] * 180.0 / M_PI;
-      can_driver.write_position_velocity(6, degree6, velocity_, acceleration_);
+    double degree6 = cmd_[5] * 180.0 / M_PI;
+    can_driver.write_position_velocity(6, degree6, limited_velocity, limited_acceleration);
+    
+    // 디버그 출력 (필요시)
+    static int debug_counter = 0;
+    if (++debug_counter % 100 == 0) {  // 1초마다 출력
+        RCLCPP_INFO(get_logger(), "Velocity: %.1f RPM, Acceleration: %.1f RPM/s", 
+                   limited_velocity, limited_acceleration);
+    }
   }
   catch (const std::exception& e) {
       RCLCPP_ERROR(rclcpp::get_logger("SfBotSystemHardware"), "Failed to write command: %s", e.what());
       return hardware_interface::return_type::ERROR;
   }
-  // write 함수는 일단 비움..
-  /*int motor_l_counts_per_loop = wheel_l_.cmd / wheel_l_.rads_per_count / cfg_.loop_rate;
-  int motor_r_counts_per_loop = wheel_r_.cmd / wheel_r_.rads_per_count / cfg_.loop_rate;
-  comms_.set_motor_values(motor_l_counts_per_loop, motor_r_counts_per_loop);*/
 
   return hardware_interface::return_type::OK;
 }
