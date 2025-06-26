@@ -590,6 +590,17 @@ private:
                         // 매핑된 인터페이스가 있으면 해당 인터페이스로만 전송
                         if (can_idx >= 0 && can_idx < MAX_CAN_INTERFACES && 
                             can_interfaces_[can_idx].is_connected) {
+
+                            // <<< 디버깅 로그 추가 >>>
+                            std::cout << "*** DEBUG CAN Motor " << static_cast<int>(cmd_copy.motor_id)
+                                    << ": ID=0x" << std::hex << frame.can_id
+                                    << ", DLC=" << std::dec << (int)frame.can_dlc
+                                    << ", Data=[";
+                            for(int k=0; k < frame.can_dlc; ++k) {
+                                std::cout << "0x" << std::hex << static_cast<int>(frame.data[k]) << " ";
+                            }
+                            std::cout << std::dec << "]" << std::endl;
+                            // <<< 디버깅 로그 끝 >>>
                             
                             // CAN 메시지 전송
                             ssize_t result = write(can_interfaces_[can_idx].socket_fd, &frame, sizeof(struct can_frame));

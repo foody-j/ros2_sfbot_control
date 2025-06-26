@@ -285,7 +285,9 @@ hardware_interface::return_type SfBotSystemHardware::read(
   {
     return hardware_interface::return_type::ERROR;
   }
-  for (uint8_t i = 1; i < 7; i++)  // 모터 1번과 2번의 데이터를 가져옴
+  // <<< 핵심 수정 부분 >>>
+  // 각 모터의 최신 상태를 읽어서 pos_ 배열을 업데이트
+  for (uint8_t i = 1; i < 7; i++)  
   {
       motor_data = can_driver.getMotorData(i);
       // pos_[i-1] = motor_data.position;
@@ -301,21 +303,6 @@ hardware_interface::return_type SfBotSystemHardware::read(
           << "Error: 0x" << std::hex << static_cast<int>(motor_data.error) 
           << std::dec << std::endl;
   }
-
-  /*
-  comms_.read_encoder_values(wheel_l_.enc, wheel_r_.enc);
-
-  double delta_seconds = period.seconds();
-
-  double pos_prev = wheel_l_.pos;
-  wheel_l_.pos = wheel_l_.calc_enc_angle();
-  wheel_l_.vel = (wheel_l_.pos - pos_prev) / delta_seconds;
-
-  pos_prev = wheel_r_.pos;
-  wheel_r_.pos = wheel_r_.calc_enc_angle();
-  wheel_r_.vel = (wheel_r_.pos - pos_prev) / delta_seconds;*/
-
-  // END: This part here is for exemplary purposes - Please do not copy to your production code
 
   return hardware_interface::return_type::OK;
 }

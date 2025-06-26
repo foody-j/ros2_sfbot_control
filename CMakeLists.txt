@@ -70,6 +70,25 @@ install(
   DIRECTORY bringup/launch bringup/config
   DESTINATION share/sfbot_can
 )
+install(
+  PROGRAMS scripts/advanced_cartesian_controller.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+install(
+  PROGRAMS
+  scripts/advanced_cartesian_controller.py
+  scripts/simple_action_test.py # <<< 이 줄을 추가하세요
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+install(
+  PROGRAMS
+  scripts/advanced_cartesian_controller.py
+  scripts/simple_action_test.py 
+  scripts/direct_command_test.py # <<< 이 줄을 추가
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 install(TARGETS sfbot_can
   EXPORT export_sfbot_control
   ARCHIVE DESTINATION lib

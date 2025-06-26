@@ -3,6 +3,9 @@
 
 #include <array>
 #include <cstdint>
+#include <stdexcept>
+#include <mutex> // <<< Mutex 헤더 추가
+
 
 struct MotorData {
     uint8_t motor_id{0};     // 모터 ID (1~6)
@@ -18,6 +21,7 @@ public:
     static constexpr size_t MAX_MOTORS = 6;
     
     MotorData& getMotorData(uint8_t motor_id) {
+        std::lock_guard<std::mutex> lock(data_mutex_); // <<< 잠금 추가
         if (motor_id < 1 || motor_id > MAX_MOTORS) {
             throw std::runtime_error("Invalid motor ID");
         }
@@ -26,6 +30,7 @@ public:
     }
 
     void updateMotorData(uint8_t motor_id, const MotorData& data) {
+        std::lock_guard<std::mutex> lock(data_mutex_); // <<< 잠금 추가
         if (motor_id < 1 || motor_id > MAX_MOTORS) {
             throw std::runtime_error("Invalid motor ID");
         }
@@ -35,6 +40,7 @@ public:
 
     void reset() {
         for (uint8_t i = 0; i < MAX_MOTORS; ++i) {
+            std::lock_guard<std::mutex> lock(data_mutex_); // <<< 잠금 추가
             motor_data_[i] = MotorData{};
             motor_data_[i].motor_id = i + 1; // 리셋 시에도 ID 유지
         }
@@ -62,6 +68,7 @@ public:
     }
 private:
     std::array<MotorData, MAX_MOTORS> motor_data_;
+    mutable std::mutex data_mutex_; // <<< Mutex 멤버 변수 추가
 };
 
 #endif // MOTOR_DATA_HPP
